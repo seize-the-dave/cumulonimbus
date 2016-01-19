@@ -9,7 +9,7 @@
   },
   "main": "lib/cumulonimbus.js",
   "scripts": {
-    "test": "vows tests/*"
+    "test": "vows tests/* --spec"
   },
   "repository": {
     "type": "git",
