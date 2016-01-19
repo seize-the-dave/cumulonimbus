@@ -1,6 +1,6 @@
 var vows = require('vows'),
     assert = require('assert'),
-    template = require('cumulonimbus').Template;
+    template = require('../lib/cumulonimbus').Template;
     
 vows.describe('JSON Rendering').addBatch({
     'when instantiating a new template': {
