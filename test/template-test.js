@@ -1,7 +1,7 @@
 var vows = require('vows'),
     assert = require('assert');
     
-vows.describe('Division by Zero').addBatch{{
+vows.describe('Division by Zero').addBatch({
     'when dividing a number by zero': {
         topic: function() {
             return 42 / 0;
