@@ -9,7 +9,7 @@
   },
   "main": "lib/cumulonimbus.js",
   "scripts": {
-    "test": "vows tests/* --spec"
+    "test": "vows test/* --spec"
   },
   "devDependencies": {
     "vows": "0.8.1"
