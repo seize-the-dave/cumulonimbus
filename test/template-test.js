@@ -8,9 +8,7 @@ vows.describe('JSON Rendering').addBatch({
             return new cn.Template().toJson();
         },
         'we get only the template format version': function(topic) {
-            assert.equal(topic, {
-                "AWSTemplateFormatVersion": "2010-09-09"
-            });
+            assert.equal(topic, {"AWSTemplateFormatVersion": "2010-09-09"});
         }
     }
 }).export(module);
