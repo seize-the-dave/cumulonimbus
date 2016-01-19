@@ -1,25 +1,16 @@
 var vows = require('vows'),
-    assert = require('assert');
+    assert = require('assert'),
+    template = require('cumulonimbus').Template;
     
-vows.describe('Division by Zero').addBatch({
-    'when dividing a number by zero': {
+vows.describe('JSON Rendering').addBatch({
+    'when instantiating a new template': {
         topic: function() {
-            return 42 / 0;
+            return new Template();
         },
-        'we get Infinity': function(topic) {
-            assert.equal(topic, Infinity);
-        }
-    },
-    'but when dividing zero by zero': {
-        topic: function () { return 0 / 0 },
-
-        'we get a value which': {
-            'is not a number': function (topic) {
-                assert.isNaN (topic);
-            },
-            'is not equal to itself': function (topic) {
-                assert.notEqual (topic, topic);
-            }
+        'we get only the template format version': function(topic) {
+            assert.equal(topic, {
+                "AWSTemplateFormatVersion": "2010-09-09"
+            });
         }
     }
 }).export(module);
