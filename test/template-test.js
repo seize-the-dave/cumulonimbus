@@ -1,11 +1,11 @@
 var vows = require('vows'),
     assert = require('assert'),
-    template = require('../lib/cumulonimbus').Template;
+    cn = require('../lib/cumulonimbus');
     
 vows.describe('JSON Rendering').addBatch({
     'when instantiating a new template': {
         topic: function() {
-            return new Template();
+            return new cn.Template();
         },
         'we get only the template format version': function(topic) {
             assert.equal(topic, {
