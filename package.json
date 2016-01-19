@@ -8,6 +8,9 @@
     "url": "https://github.com/seize-the-dave/cumulonimbus/issues"
   },
   "main": "lib/cumulonimbus.js",
+  "scripts": {
+    "test": "vows tests/*"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/seize-the-dave/cumulonimbus"
