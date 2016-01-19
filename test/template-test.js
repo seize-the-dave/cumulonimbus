@@ -5,7 +5,7 @@ var vows = require('vows'),
 vows.describe('JSON Rendering').addBatch({
     'when instantiating a new template': {
         topic: function() {
-            return new cn.Template();
+            return new cn.Template().toJson();
         },
         'we get only the template format version': function(topic) {
             assert.equal(topic, {
