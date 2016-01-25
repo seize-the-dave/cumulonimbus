@@ -41,13 +41,13 @@ describe('AWS::EC2::RouteTable', function() {
 
   describe('Tags', function() {
     it('should be present in the JSON output', function() {
-      var resource = new cn.Ec2.Subnet("Subnet");
-      resource.addTag("Name", "Subnet");
+      var resource = new cn.Ec2.RouteTable("RouteTable");
+      resource.addTag("Name", "RouteTable");
       should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::Subnet",
+        "Type": "AWS::EC2::RouteTable",
         "Properties": {
           "Tags": {
-            "Name": "Subnet"
+            "Name": "RouteTable"
           }
         }
       });

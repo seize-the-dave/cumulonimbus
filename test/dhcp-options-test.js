@@ -75,4 +75,19 @@ describe('AWS::EC2::DHCPOptions', function() {
       });
     });
   });
+
+  describe('Tags', function() {
+    it('should be present in the JSON output', function() {
+      var resource = new cn.Ec2.DhcpOptions("DhcpOptions");
+      resource.addTag("Name", "DhcpOptions");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::DHCPOptions",
+        "Properties": {
+          "Tags": {
+            "Name": "DhcpOptions"
+          }
+        }
+      });
+    });
+  });
 });
