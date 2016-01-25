@@ -4,6 +4,11 @@
 
 Cumulonimbus is a Node.js library for creating AWS CloudFormation templates programmatically.
 
+## Resource Support
+
+* AWS::EC2::VPC
+* AWS::EC2::Subnet
+
 ## Usage
 
 ```js
@@ -17,7 +22,12 @@ vpc.setCidrBlock("10.0.0.0/16");
 vpc.setInstanceTenancy("dedicated");
 vpc.addTag("Name", "VPC");
 
+var publicSubnet = new cn.Ec2.Subnet("PublicSubnet");
+publicSubnet.setCidrBlock("10.0.0.0/24");
+publicSubnet.setVpcId(vpc);
+
 template.addResource(vpc);
+template.addResource(publicSubnet);
 template.validate(function(err) {
   if (err === undefined) {
     console.log(JSON.stringify(template.toJson(), null, 4));
@@ -40,6 +50,15 @@ Running the JavaScript file about yields the following output:
                 "InstanceTenancy": "dedicated",
                 "Tags": {
                     "Name": "VPC"
+                }
+            }
+        },
+        "PublicSubnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.0.0.0/24",
+                "VpcId": {
+                    "Ref": "VPC"
                 }
             }
         }
