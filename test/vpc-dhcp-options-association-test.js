@@ -36,6 +36,13 @@ describe('AWS::EC2::VPCDHCPOptionsAssociation', function() {
         }
       });
     });
+
+    it('rejected malformed string', function() {
+      var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
+      should.throws(function() {
+        resource.setVpcId("cloud-123456")
+      });
+    });
   });
 
   describe('DhcpOptionsId', function() {
@@ -55,12 +62,19 @@ describe('AWS::EC2::VPCDHCPOptionsAssociation', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
-      resource.setDhcpOptionsId("dhcp-123456");
+      resource.setDhcpOptionsId("dopt-123456");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPCDHCPOptionsAssociation",
         "Properties": {
-          "DhcpOptionsId": "dhcp-123456"
+          "DhcpOptionsId": "dopt-123456"
         }
+      });
+    });
+
+    it('rejects malformed string', function() {
+      var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
+      should.throws(function() {
+        resource.setDhcpOptionsId("dhcp-123456")
       });
     });
   });

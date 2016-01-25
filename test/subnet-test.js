@@ -1,5 +1,5 @@
 var should = require('should'),
-    cn = require('../lib/cumulonimbus');
+  cn = require('../lib/cumulonimbus');
 
 describe('AWS::EC2::Subnet', function() {
   describe('New Instance', function() {
@@ -78,6 +78,14 @@ describe('AWS::EC2::Subnet', function() {
           "CidrBlock": "10.0.0.0/16",
           "VpcId": "vpc-123456"
         }
+      });
+    });
+
+    it('rejected malformed string', function() {
+      var vpc = new cn.Ec2.Vpc("VPC");
+      var subnet = new cn.Ec2.Subnet("Subnet");
+      should.throws(function() {
+        subnet.setVpcId("cloud-123456")
       });
     });
   });

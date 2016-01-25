@@ -28,13 +28,20 @@ describe('AWS::EC2::RouteTable', function() {
 
     it('accepts string', function() {
       var vpc = new cn.Ec2.Vpc("VPC");
-      var rt = new cn.Ec2.RouteTable("Subnet");
+      var rt = new cn.Ec2.RouteTable("RouteTable");
       rt.setVpcId("vpc-123456");
       should(rt.toJson()).deepEqual({
         "Type": "AWS::EC2::RouteTable",
         "Properties": {
           "VpcId": "vpc-123456"
         }
+      });
+    });
+
+    it('rejected malformed string', function() {
+      var resource = new cn.Ec2.RouteTable("RouteTable");
+      should.throws(function() {
+        resource.setVpcId("cloud-123456")
       });
     });
   });
