@@ -12,7 +12,7 @@ describe('VPC', function() {
   });
 
   describe('setting a CIDR block', function() {
-    it('should be in the JSON output', function() {
+    it('should be present in the JSON output', function() {
       var resource = new cn.EC2.VPC("VPC");
       resource.setCidrBlock("10.0.0.0/24");
       should(resource.toJson()).deepEqual({
@@ -25,7 +25,7 @@ describe('VPC', function() {
   });
 
   describe('enabling DNS hostnames', function() {
-    it('should be in the JSON output', function() {
+    it('should be present in the JSON output', function() {
       var resource = new cn.EC2.VPC("VPC");
       resource.enableDnsHostnames(true);
       should(resource.toJson()).deepEqual({
@@ -38,7 +38,7 @@ describe('VPC', function() {
   });
 
   describe('enabling DNS support', function() {
-    it('should be in the JSON output', function() {
+    it('should be present in the JSON output', function() {
       var resource = new cn.EC2.VPC("VPC");
       resource.enableDnsSupport(true);
       should(resource.toJson()).deepEqual({
@@ -51,13 +51,28 @@ describe('VPC', function() {
   });
 
   describe('setting instance tenancy', function() {
-    it('should be in the JSON output', function() {
+    it('should be present in the JSON output', function() {
       var resource = new cn.EC2.VPC("VPC");
       resource.setInstanceTenancy("dedicated");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPC",
         "Properties": {
           "InstanceTenancy": "dedicated"
+        }
+      });
+    });
+  });
+
+  describe('setting a tag', function() {
+    it('should be present in the JSON output', function() {
+      var resource = new cn.EC2.VPC("VPC");
+      resource.addTag("Name", "VPC");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::VPC",
+        "Properties": {
+          "Tags": {
+            "Name": "VPC"
+          }
         }
       });
     });
