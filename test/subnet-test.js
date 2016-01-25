@@ -51,7 +51,7 @@ describe('AWS::EC2::Subnet', function() {
   });
 
   describe('VpcId', function() {
-    it('ref should be present in the JSON output', function() {
+    it('accepts reference', function() {
       var vpc = new cn.Ec2.Vpc("VPC");
       var subnet = new cn.Ec2.Subnet("Subnet");
       subnet.setVpcId(vpc);
@@ -67,7 +67,7 @@ describe('AWS::EC2::Subnet', function() {
       });
     });
 
-    it('string should be present in the JSON output', function() {
+    it('accepts string', function() {
       var vpc = new cn.Ec2.Vpc("VPC");
       var subnet = new cn.Ec2.Subnet("Subnet");
       subnet.setVpcId("vpc-123456");
