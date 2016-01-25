@@ -9,13 +9,15 @@
   },
   "main": "lib/cumulonimbus.js",
   "scripts": {
-    "test": "istanbul cover test/* --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "devDependencies": {
     "coveralls": "^2.11.6",
     "istanbul": "^0.4.2",
     "jscoverage": "^0.6.0",
+    "mocha": "^2.3.4",
     "nodeunit": "^0.9.1",
+    "should": "^8.2.0",
     "vows": "0.8.1"
   },
   "repository": {
