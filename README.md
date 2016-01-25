@@ -21,7 +21,7 @@ vpc.addTag("Name", "VPC");
 template.addResource(vpc);
 template.validate(function(err) {
   if (err === undefined) {
-    console.log(template.toJson());
+    console.log(JSON.stringify(template.toJson()));
   }
 });
 ```
