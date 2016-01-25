@@ -16,6 +16,7 @@ vpc.enableDnsSupport(true);
 vpc.enableDnsHostnames(true);
 vpc.setCidrBlock("10.0.0.0/16");
 vpc.setInstanceTenancy("dedicated");
+vpc.addTag("Name", "VPC");
 
 template.addResource(vpc);
 template.validate(function(err) {
