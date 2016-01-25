@@ -17,8 +17,7 @@
     "jscoverage": "^0.6.0",
     "mocha": "^2.3.4",
     "nodeunit": "^0.9.1",
-    "should": "^8.2.0",
-    "vows": "0.8.1"
+    "should": "^8.2.0"
   },
   "repository": {
     "type": "git",
