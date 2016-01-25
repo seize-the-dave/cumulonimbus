@@ -4,6 +4,11 @@
 
 Cumulonimbus is a Node.js library for creating AWS CloudFormation templates programmatically.
 
+## Resource Support
+
+* AWS::EC2::VPC
+* AWS::EC2::Subnet
+
 ## Usage
 
 ```js
