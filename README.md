@@ -22,7 +22,12 @@ vpc.setCidrBlock("10.0.0.0/16");
 vpc.setInstanceTenancy("dedicated");
 vpc.addTag("Name", "VPC");
 
+var publicSubnet = new cn.Ec2.Subnet("PublicSubnet");
+publicSubnet.setCidrBlock("10.0.0.0/24");
+publicSubnet.setVpcId(vpc);
+
 template.addResource(vpc);
+template.addResource(publicSubnet);
 template.validate(function(err) {
   if (err === undefined) {
     console.log(JSON.stringify(template.toJson(), null, 4));
