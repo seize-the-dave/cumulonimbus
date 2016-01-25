@@ -23,9 +23,23 @@ describe('Template', function() {
   describe('when validating a template with at least one resource', function() {
     it("should not return an error", function() {
       var template = new cn.Template();
-      template.addResource(new cn.Resource("VPC", "AWS::EC2::VPC"));
+      template.addResource(new cn.EC2.VPC("VPC"));
       template.validate(function(err) {
         should.not.exist(err);
+      });
+    });
+  });
+
+  describe('when adding a resource to a template', function() {
+    it("should contain that resource in the JSON output", function() {
+      var template = new cn.Template();
+      template.addResource(new cn.EC2.VPC("VPC"));
+      should(template.toJson()).containEql({
+        "Resources": {
+          "VPC": {
+            "Type": "AWS::EC2::VPC"
+          }
+        }
       });
     });
   });
