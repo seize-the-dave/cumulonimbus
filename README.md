@@ -40,7 +40,7 @@ template.validate(function(err) {
 });
 ```
 
-Running the JavaScript file about yields the following output:
+Running the JavaScript file above yields the following output:
 
 ```json
 {
