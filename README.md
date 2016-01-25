@@ -10,7 +10,6 @@ Cumulonimbus is a Node.js library for creating AWS CloudFormation templates prog
 var cn = require('cumulonimbus');
 
 var template = new cn.Template();
-
 var vpc = new cn.EC2.VPC("VPC");
 vpc.enableDnsSupport(true);
 vpc.enableDnsHostnames(true);
@@ -24,4 +23,26 @@ template.validate(function(err) {
     console.log(JSON.stringify(template.toJson(), null, 4));
   }
 });
+```
+
+Running the JavaScript file about yields the following output:
+
+```json
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+        "VPC": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "EnableDnsSupport": true,
+                "EnableDnsHostnames": true,
+                "CidrBlock": "10.0.0.0/16",
+                "InstanceTenancy": "dedicated",
+                "Tags": {
+                    "Name": "VPC"
+                }
+            }
+        }
+    }
+}
 ```
