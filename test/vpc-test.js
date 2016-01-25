@@ -4,7 +4,7 @@ var should = require('should'),
 describe('VPC', function() {
   describe('instantiating an empty VPC', function() {
     it('we only get the type key', function() {
-      var resource = new cn.EC2.VPC("VPC");
+      var resource = new cn.Ec2.Vpc("VPC");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPC"
       });
@@ -13,7 +13,7 @@ describe('VPC', function() {
 
   describe('setting a CIDR block', function() {
     it('should be present in the JSON output', function() {
-      var resource = new cn.EC2.VPC("VPC");
+      var resource = new cn.Ec2.Vpc("VPC");
       resource.setCidrBlock("10.0.0.0/24");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPC",
@@ -26,7 +26,7 @@ describe('VPC', function() {
 
   describe('enabling DNS hostnames', function() {
     it('should be present in the JSON output', function() {
-      var resource = new cn.EC2.VPC("VPC");
+      var resource = new cn.Ec2.Vpc("VPC");
       resource.enableDnsHostnames(true);
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPC",
@@ -39,7 +39,7 @@ describe('VPC', function() {
 
   describe('enabling DNS support', function() {
     it('should be present in the JSON output', function() {
-      var resource = new cn.EC2.VPC("VPC");
+      var resource = new cn.Ec2.Vpc("VPC");
       resource.enableDnsSupport(true);
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPC",
@@ -52,7 +52,7 @@ describe('VPC', function() {
 
   describe('setting instance tenancy', function() {
     it('should be present in the JSON output', function() {
-      var resource = new cn.EC2.VPC("VPC");
+      var resource = new cn.Ec2.Vpc("VPC");
       resource.setInstanceTenancy("dedicated");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPC",
@@ -65,7 +65,7 @@ describe('VPC', function() {
 
   describe('setting a tag', function() {
     it('should be present in the JSON output', function() {
-      var resource = new cn.EC2.VPC("VPC");
+      var resource = new cn.Ec2.Vpc("VPC");
       resource.addTag("Name", "VPC");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPC",
