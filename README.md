@@ -52,6 +52,15 @@ Running the JavaScript file about yields the following output:
                     "Name": "VPC"
                 }
             }
+        },
+        "PublicSubnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.0.0.0/24",
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            }
         }
     }
 }
