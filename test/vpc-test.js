@@ -1,7 +1,7 @@
 var should = require('should'),
     cn = require('../lib/cumulonimbus');
 
-describe('VPC', function() {
+describe('AWS::EC2::VPC', function() {
   describe('New Instance', function() {
     it('we only get the type key', function() {
       var resource = new cn.Ec2.Vpc("VPC");
