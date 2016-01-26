@@ -21,11 +21,20 @@ describe('Template', function() {
   });
 
   describe('when validating a template with at least one resource', function() {
-    it("should not return an error", function() {
+    it("should not return an error for complete resources", function() {
+      var template = new cn.Template();
+      var vpc = new cn.Ec2.Vpc("VPC");
+      vpc.setCidrBlock("10.0.0.0/16");
+      template.addResource(vpc);
+      template.validate(function(err) {
+        should.not.exist(err);
+      });
+    });
+    it("then it should return an error for an incomplete resource", function() {
       var template = new cn.Template();
       template.addResource(new cn.Ec2.Vpc("VPC"));
       template.validate(function(err) {
-        should.not.exist(err);
+        should.exist(err);
       });
     });
   });

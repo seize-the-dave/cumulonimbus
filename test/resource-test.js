@@ -15,4 +15,13 @@ describe('Resource', function() {
       });
     });
   });
+
+  describe('validate', function() {
+    it('should throw error for default implementation', function() {
+      var resource = new Resource("Key", "Value");
+      resource.validate(function(err) {
+        should.exist(err);
+      });
+    });
+  });
 });
