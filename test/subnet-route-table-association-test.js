@@ -11,16 +11,16 @@ describe('AWS::EC2::SubnetRouteTableAssociation', function() {
     });
   });
 
-  describe('VpcId', function() {
+  describe('SubnetId', function() {
     it('accepts reference', function() {
-      var vpc = new cn.Ec2.Vpc("VPC");
+      var subnet = new cn.Ec2.Subnet("MySubnet");
       var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
-      resource.setVpcId(vpc);
+      resource.setSubnetId(subnet);
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::SubnetRouteTableAssociation",
         "Properties": {
-          "VpcId": {
-            "Ref": "VPC"
+          "SubnetId": {
+            "Ref": "MySubnet"
           }
         }
       });
@@ -28,11 +28,11 @@ describe('AWS::EC2::SubnetRouteTableAssociation', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
-      resource.setVpcId("vpc-123456");
+      resource.setSubnetId("subnet-123456");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::SubnetRouteTableAssociation",
         "Properties": {
-          "VpcId": "vpc-123456"
+          "SubnetId": "subnet-123456"
         }
       });
     });
@@ -40,7 +40,7 @@ describe('AWS::EC2::SubnetRouteTableAssociation', function() {
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
       should.throws(function() {
-        resource.setVpcId("cloud-123456")
+        resource.setSubnetId("net-123456");
       });
     });
   });
@@ -74,7 +74,7 @@ describe('AWS::EC2::SubnetRouteTableAssociation', function() {
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
       should.throws(function() {
-        resource.setRouteTableId("table-123456")
+        resource.setRouteTableId("table-123456");
       });
     });
   });
