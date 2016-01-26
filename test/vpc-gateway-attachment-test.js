@@ -40,7 +40,7 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.VpcGatewayAttachment("Attachment");
       should.throws(function() {
-        resource.setVpcId("cloud-123456")
+        resource.setVpcId("cloud-123456");
       });
     });
   });
@@ -74,7 +74,41 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.VpcGatewayAttachment("RouteTableAssoc");
       should.throws(function() {
-        resource.setInternetGatewayId("gateway-123456")
+        resource.setInternetGatewayId("gateway-123456");
+      });
+    });
+  });
+
+  describe('VpnGatewayId', function() {
+    it('accepts reference', function() {
+      var gateway = new cn.Ec2.VpnGateway("Gateway");
+      var resource = new cn.Ec2.VpcGatewayAttachment("Attachment");
+      resource.setVpnGatewayId(gateway);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::VPCGatewayAttachment",
+        "Properties": {
+          "VpnGatewayId": {
+            "Ref": "Gateway"
+          }
+        }
+      });
+    });
+
+    it('accepts string', function() {
+      var resource = new cn.Ec2.VpcGatewayAttachment("Attachment");
+      resource.setVpnGatewayId("vgw-123456");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::VPCGatewayAttachment",
+        "Properties": {
+          "VpnGatewayId": "vgw-123456"
+        }
+      });
+    });
+
+    it('rejected malformed string', function() {
+      var resource = new cn.Ec2.VpcGatewayAttachment("RouteTableAssoc");
+      should.throws(function() {
+        resource.setVpnGatewayId("gateway-123456");
       });
     });
   });
