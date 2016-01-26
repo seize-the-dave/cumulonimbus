@@ -449,6 +449,161 @@ describe('AWS::EC2::Instance', function() {
     });
   });
 
+  describe('SecurityGroupIds', function() {
+    it('accepts single reference', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
+      resource.setSecurityGroupIds(sg_one);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "SecurityGroupIds": [{
+            "Ref": "MySecurityGroup1"
+          }]
+        }
+      });
+    });
+
+    it('accepts single string', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
+      resource.setSecurityGroupIds("sg-1234567");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "SecurityGroupIds": ["sg-1234567"]
+        }
+      });
+    });
+
+    it('rejects single malformed string', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      should.throws(function() {
+        resource.setSecurityGroupIds("group-1234567");
+      });
+    });
+
+    it('accepts multiple references', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
+      var sg_two = new cn.Ec2.SecurityGroup("MySecurityGroup2");
+      resource.setSecurityGroupIds([sg_one, sg_two]);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "SecurityGroupIds": [{
+            "Ref": "MySecurityGroup1"
+          }, {
+            "Ref": "MySecurityGroup2"
+          }, ]
+        }
+      });
+    });
+
+    it('accepts multiple strings', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
+      resource.setSecurityGroupIds(["sg-1234567", "sg-2345678"]);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "SecurityGroupIds": ["sg-1234567", "sg-2345678"]
+        }
+      });
+    });
+
+    it('rejects multiple malformed strings', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      should.throws(function() {
+        resource.setSecurityGroupIds(["group-1234567", "group-2345678"]);
+      });
+    });
+
+    it('accepts multiple mixed types', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
+      resource.setSecurityGroupIds(["sg-1234567", sg_one]);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "SecurityGroupIds": ["sg-1234567", {
+            "Ref": "MySecurityGroup1"
+          }]
+        }
+      });
+    });
+  });
+
+  describe('SecurityGroups', function() {
+    it('accepts single reference', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
+      resource.setSecurityGroups(sg_one);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "SecurityGroups": [{
+            "Ref": "MySecurityGroup1"
+          }]
+        }
+      });
+    });
+
+    it('accepts single string', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
+      resource.setSecurityGroups("MySecurityGroup1");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "SecurityGroups": ["MySecurityGroup1"]
+        }
+      });
+    });
+
+    it('accepts multiple references', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
+      var sg_two = new cn.Ec2.SecurityGroup("MySecurityGroup2");
+      resource.setSecurityGroups([sg_one, sg_two]);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "SecurityGroups": [{
+            "Ref": "MySecurityGroup1"
+          }, {
+            "Ref": "MySecurityGroup2"
+          }, ]
+        }
+      });
+    });
+
+    it('accepts multiple strings', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      resource.setSecurityGroups(["MySecurityGroup1", "MySecurityGroup2"]);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "SecurityGroups": ["MySecurityGroup1", "MySecurityGroup2"]
+        }
+      });
+    });
+
+    it('accepts multiple mixed types', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
+      resource.setSecurityGroups(["MySecurityGroup1", sg_one]);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "SecurityGroups": ["MySecurityGroup1", {
+            "Ref": "MySecurityGroup1"
+          }]
+        }
+      });
+    });
+  });
+
   describe('SourceDestCheck', function() {
     it('should be present in the JSON output', function() {
       var resource = new cn.Ec2.Instance("Instance");
