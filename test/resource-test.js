@@ -8,5 +8,11 @@ describe('Resource', function() {
         new Resource("Malformed Example", "AWS::EC2::VPC");
       });
     });
+
+    it('error should be thrown for missing key', function() {
+      should.throws(function() {
+        new Resource(undefined, "AWS::EC2::VPC");
+      });
+    });
   });
 });
