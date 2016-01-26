@@ -1,0 +1,9 @@
+{
+  "name": "cumulonimbus-examples",
+  "scripts": {
+    "vpc-example": "node vpc-example.js"
+  },
+  "dependencies": {
+    "cumulonimbus": "*"
+  }
+}
