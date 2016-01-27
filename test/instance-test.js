@@ -696,4 +696,14 @@ describe('AWS::EC2::Instance', function() {
       });
     });
   });
+
+  describe('validation', function() {
+    it('should require ImageId', function() {
+      var resource = new cn.Ec2.Instance("MyInstance");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("ImageId");
+      })
+    });
+  });
 });

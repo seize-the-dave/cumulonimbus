@@ -78,4 +78,24 @@ describe('AWS::EC2::SubnetRouteTableAssociation', function() {
       });
     });
   });
+
+  describe('validation', function() {
+    it('should require RouteTableId', function() {
+      var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
+      resource.setSubnetId("subnet-123456");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("RouteTableId");
+      })
+    });
+
+    it('should require SubnetId', function() {
+      var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
+      resource.setRouteTableId("rtb-123456");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("SubnetId");
+      })
+    });
+  });
 });

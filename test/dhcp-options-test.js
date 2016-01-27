@@ -90,4 +90,20 @@ describe('AWS::EC2::DHCPOptions', function() {
       });
     });
   });
+
+  describe('validation', function() {
+    it('should require DomainNameServers, NetbiosNameServers or NtpServers', function() {
+      var resource = new cn.Ec2.DhcpOptions("DhcpOptions");
+      resource.validate(function(err) {
+        should.exist(err);
+      })
+    });
+    it('should require NetbiosNodeType if NetbiosNameServers is set', function() {
+      var resource = new cn.Ec2.DhcpOptions("DhcpOptions");
+      resource.setNetbiosNameServers(["10.0.0.1"]);
+      resource.validate(function(err) {
+        should.exist(err);
+      })
+    });
+  });
 });

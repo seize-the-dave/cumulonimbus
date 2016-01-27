@@ -104,4 +104,24 @@ describe('AWS::EC2::Subnet', function() {
       });
     });
   });
+
+  describe('validation', function() {
+    it('should require CidrBlock', function() {
+      var resource = new cn.Ec2.Subnet("Subnet");
+      resource.setVpcId("vpc-123456");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("CidrBlock");
+      })
+    });
+
+    it('should require VpcId', function() {
+      var resource = new cn.Ec2.Subnet("Subnet");
+      resource.setCidrBlock("10.0.0.0/16");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("VpcId");
+      })
+    });
+  });
 });

@@ -78,4 +78,24 @@ describe('AWS::EC2::VPCDHCPOptionsAssociation', function() {
       });
     });
   });
+
+  describe('validation', function() {
+    it('should require DhcpOptionsId', function() {
+      var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
+      resource.setVpcId("vpc-123456");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("DhcpOptionsId");
+      })
+    });
+
+    it('should require VpcId', function() {
+      var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
+      resource.setDhcpOptionsId("dopt-123456");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("VpcId");
+      })
+    });
+  });
 });

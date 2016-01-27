@@ -77,4 +77,14 @@ describe('AWS::EC2::VPC', function() {
       });
     });
   });
+
+  describe('validation', function() {
+    it('should require CidrBlock', function() {
+      var resource = new cn.Ec2.Vpc("VPC");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("CidrBlock");
+      })
+    });
+  });
 });

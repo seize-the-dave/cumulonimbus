@@ -112,4 +112,24 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
       });
     });
   });
+
+  describe('validation', function() {
+    it('should require InternetGatewayId or VpnGatewayId', function() {
+      var resource = new cn.Ec2.VpcGatewayAttachment("RouteTableAssoc");
+      resource.setVpcId("vpc-123456");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("InternetGatewayId");
+      })
+    });
+
+    it('should require VpcId', function() {
+      var resource = new cn.Ec2.VpcGatewayAttachment("RouteTableAssoc");
+      resource.setInternetGatewayId("igw-123456");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("VpcId");
+      })
+    });
+  });
 });

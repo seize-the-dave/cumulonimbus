@@ -347,4 +347,14 @@ describe('AWS::EC2::SecurityGroup', function() {
       });
     });
   });
+
+  describe('validation', function() {
+    it('should require GroupDescription', function() {
+      var resource = new cn.Ec2.SecurityGroup("MySecurityGroup");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("GroupDescription");
+      })
+    });
+  });
 });

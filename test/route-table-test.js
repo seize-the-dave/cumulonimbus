@@ -60,4 +60,14 @@ describe('AWS::EC2::RouteTable', function() {
       });
     });
   });
+
+  describe('validation', function() {
+    it('should require VpcId', function() {
+      var resource = new cn.Ec2.RouteTable("RouteTable");
+      resource.validate(function(err) {
+        should.exist(err);
+        err.message.should.containEql("VpcId");
+      })
+    });
+  });
 });

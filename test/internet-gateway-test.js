@@ -25,4 +25,12 @@ describe('AWS::EC2::InternetGateway', function() {
       });
     });
   });
+  describe('validation', function() {
+    it('should never return an error', function() {
+      var resource = new cn.Ec2.InternetGateway("IGW");
+      resource.validate(function(err) {
+        should.not.exist(err);
+      })
+    });
+  });
 });
