@@ -41,7 +41,7 @@ describe('AWS::EC2::RouteTable', function() {
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.RouteTable("RouteTable");
       should.throws(function() {
-        resource.setVpcId("cloud-123456")
+        resource.setVpcId("cloud-123456");
       });
     });
   });

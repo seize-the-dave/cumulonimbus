@@ -57,6 +57,10 @@ instance.setImageId("ami-1234567");
 instance.setSecurityGroupIds(securityGroup);
 template.addResource(instance);
 
+var eip = new cn.Ec2.Eip("MyElasticIP");
+eip.setInstanceId(instance);
+template.addResource(eip);
+
 template.validate(function(err) {
   if (err === undefined) {
     console.log(JSON.stringify(template.toJson(), null, 4));
