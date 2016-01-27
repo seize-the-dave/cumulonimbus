@@ -29,14 +29,4 @@ describe('AWS::EC2::VPNGateway', function() {
       });
     });
   });
-
-  describe('validation', function() {
-    it('should require Type', function() {
-      var resource = new cn.Ec2.VpnGateway("VPN");
-      resource.validate(function(err) {
-        should.exist(err);
-        err.message.should.containEql("Type");
-      })
-    });
-  });
 });

@@ -15,4 +15,13 @@ describe('Resource', function() {
       });
     });
   });
+
+  describe('validation', function() {
+    it('should not return an error by default', function() {
+      var resource = new Resource("MyResoure", "AWS::EC2::VPC");
+      resource.validate(function(err) {
+        should.not.exist(err);
+      });
+    });
+  });
 });
