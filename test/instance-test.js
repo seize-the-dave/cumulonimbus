@@ -125,7 +125,7 @@ describe('AWS::EC2::Instance', function() {
           var resource = new cn.Ec2.Instance("Instance");
           var bdm = new cn.Ec2.Instance.BlockDeviceMapping();
           var ebs = new cn.Ec2.Instance.BlockDeviceMapping.BlockStore();
-          ebs.setSnapshotId("snap-1234567");
+          ebs.setSnapshotId("snap-12345678");
           bdm.setEbs(ebs);
           resource.setBlockDeviceMappings([bdm]);
           should(resource.toJson()).deepEqual({
@@ -133,7 +133,7 @@ describe('AWS::EC2::Instance', function() {
             "Properties": {
               "BlockDeviceMappings": [{
                 "Ebs": {
-                  "SnapshotId": "snap-1234567"
+                  "SnapshotId": "snap-12345678"
                 }
               }]
             }
@@ -310,11 +310,11 @@ describe('AWS::EC2::Instance', function() {
   describe('ImageId', function() {
     it('accepts valid AMI', function() {
       var resource = new cn.Ec2.Instance("Instance");
-      resource.setImageId("ami-1234567");
+      resource.setImageId("ami-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::Instance",
         "Properties": {
-          "ImageId": "ami-1234567"
+          "ImageId": "ami-12345678"
         }
       });
     });
@@ -467,11 +467,11 @@ describe('AWS::EC2::Instance', function() {
     it('accepts single string', function() {
       var resource = new cn.Ec2.Instance("Instance");
       var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
-      resource.setSecurityGroupIds("sg-1234567");
+      resource.setSecurityGroupIds("sg-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::Instance",
         "Properties": {
-          "SecurityGroupIds": ["sg-1234567"]
+          "SecurityGroupIds": ["sg-12345678"]
         }
       });
     });
@@ -503,11 +503,11 @@ describe('AWS::EC2::Instance', function() {
     it('accepts multiple strings', function() {
       var resource = new cn.Ec2.Instance("Instance");
       var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
-      resource.setSecurityGroupIds(["sg-1234567", "sg-2345678"]);
+      resource.setSecurityGroupIds(["sg-12345678", "sg-23456789"]);
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::Instance",
         "Properties": {
-          "SecurityGroupIds": ["sg-1234567", "sg-2345678"]
+          "SecurityGroupIds": ["sg-12345678", "sg-23456789"]
         }
       });
     });
@@ -522,11 +522,11 @@ describe('AWS::EC2::Instance', function() {
     it('accepts multiple mixed types', function() {
       var resource = new cn.Ec2.Instance("Instance");
       var sg_one = new cn.Ec2.SecurityGroup("MySecurityGroup1");
-      resource.setSecurityGroupIds(["sg-1234567", sg_one]);
+      resource.setSecurityGroupIds(["sg-12345678", sg_one]);
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::Instance",
         "Properties": {
-          "SecurityGroupIds": ["sg-1234567", {
+          "SecurityGroupIds": ["sg-12345678", {
             "Ref": "MySecurityGroup1"
           }]
         }
@@ -634,11 +634,11 @@ describe('AWS::EC2::Instance', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.Instance("MyInstance");
-      resource.setSubnetId("subnet-123456");
+      resource.setSubnetId("subnet-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::Instance",
         "Properties": {
-          "SubnetId": "subnet-123456"
+          "SubnetId": "subnet-12345678"
         }
       });
     });
@@ -711,7 +711,7 @@ describe('AWS::EC2::Instance', function() {
 
     it('should allow valid instance', function() {
       var resource = new cn.Ec2.Instance("MyInstance");
-      resource.setImageId("ami-1234567");
+      resource.setImageId("ami-12345678");
 
       var actual;
       resource.validate(function(err) {

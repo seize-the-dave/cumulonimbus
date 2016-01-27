@@ -28,11 +28,11 @@ describe('AWS::EC2::VPCDHCPOptionsAssociation', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
-      resource.setVpcId("vpc-123456");
+      resource.setVpcId("vpc-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPCDHCPOptionsAssociation",
         "Properties": {
-          "VpcId": "vpc-123456"
+          "VpcId": "vpc-12345678"
         }
       });
     });
@@ -62,11 +62,11 @@ describe('AWS::EC2::VPCDHCPOptionsAssociation', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
-      resource.setDhcpOptionsId("dopt-123456");
+      resource.setDhcpOptionsId("dopt-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPCDHCPOptionsAssociation",
         "Properties": {
-          "DhcpOptionsId": "dopt-123456"
+          "DhcpOptionsId": "dopt-12345678"
         }
       });
     });
@@ -82,7 +82,7 @@ describe('AWS::EC2::VPCDHCPOptionsAssociation', function() {
   describe('validation', function() {
     it('should require DhcpOptionsId', function() {
       var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
-      resource.setVpcId("vpc-123456");
+      resource.setVpcId("vpc-12345678");
 
       var actual;
       resource.validate(function(err) {
@@ -94,7 +94,7 @@ describe('AWS::EC2::VPCDHCPOptionsAssociation', function() {
 
     it('should require VpcId', function() {
       var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
-      resource.setDhcpOptionsId("dopt-123456");
+      resource.setDhcpOptionsId("dopt-12345678");
 
       var actual;
       resource.validate(function(err) {

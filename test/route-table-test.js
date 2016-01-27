@@ -29,11 +29,11 @@ describe('AWS::EC2::RouteTable', function() {
     it('accepts string', function() {
       var vpc = new cn.Ec2.Vpc("VPC");
       var rt = new cn.Ec2.RouteTable("RouteTable");
-      rt.setVpcId("vpc-123456");
+      rt.setVpcId("vpc-12345678");
       should(rt.toJson()).deepEqual({
         "Type": "AWS::EC2::RouteTable",
         "Properties": {
-          "VpcId": "vpc-123456"
+          "VpcId": "vpc-12345678"
         }
       });
     });
@@ -75,7 +75,7 @@ describe('AWS::EC2::RouteTable', function() {
 
     it('should allow valid object', function() {
       var resource = new cn.Ec2.RouteTable("RouteTable");
-      resource.setVpcId("vpc-123456");
+      resource.setVpcId("vpc-12345678");
 
       var actual;
       resource.validate(function(err) {

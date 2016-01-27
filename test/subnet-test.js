@@ -70,13 +70,13 @@ describe('AWS::EC2::Subnet', function() {
     it('accepts string', function() {
       var vpc = new cn.Ec2.Vpc("VPC");
       var subnet = new cn.Ec2.Subnet("Subnet");
-      subnet.setVpcId("vpc-123456");
+      subnet.setVpcId("vpc-12345678");
       subnet.setCidrBlock("10.0.0.0/16");
       should(subnet.toJson()).deepEqual({
         "Type": "AWS::EC2::Subnet",
         "Properties": {
           "CidrBlock": "10.0.0.0/16",
-          "VpcId": "vpc-123456"
+          "VpcId": "vpc-12345678"
         }
       });
     });
@@ -108,7 +108,7 @@ describe('AWS::EC2::Subnet', function() {
   describe('validation', function() {
     it('should require CidrBlock', function() {
       var resource = new cn.Ec2.Subnet("Subnet");
-      resource.setVpcId("vpc-123456");
+      resource.setVpcId("vpc-12345678");
 
       var actual;
       resource.validate(function(err) {

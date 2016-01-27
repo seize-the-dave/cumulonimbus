@@ -28,11 +28,11 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.VpcGatewayAttachment("Attachment");
-      resource.setVpcId("vpc-123456");
+      resource.setVpcId("vpc-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPCGatewayAttachment",
         "Properties": {
-          "VpcId": "vpc-123456"
+          "VpcId": "vpc-12345678"
         }
       });
     });
@@ -62,11 +62,11 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.VpcGatewayAttachment("Attachment");
-      resource.setInternetGatewayId("igw-123456");
+      resource.setInternetGatewayId("igw-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPCGatewayAttachment",
         "Properties": {
-          "InternetGatewayId": "igw-123456"
+          "InternetGatewayId": "igw-12345678"
         }
       });
     });
@@ -96,11 +96,11 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.VpcGatewayAttachment("Attachment");
-      resource.setVpnGatewayId("vgw-123456");
+      resource.setVpnGatewayId("vgw-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPCGatewayAttachment",
         "Properties": {
-          "VpnGatewayId": "vgw-123456"
+          "VpnGatewayId": "vgw-12345678"
         }
       });
     });
@@ -108,7 +108,7 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.VpcGatewayAttachment("RouteTableAssoc");
       should.throws(function() {
-        resource.setVpnGatewayId("gateway-123456");
+        resource.setVpnGatewayId("gateway-12345678");
       });
     });
   });
@@ -116,7 +116,7 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
   describe('validation', function() {
     it('should require InternetGatewayId or VpnGatewayId', function() {
       var resource = new cn.Ec2.VpcGatewayAttachment("RouteTableAssoc");
-      resource.setVpcId("vpc-123456");
+      resource.setVpcId("vpc-12345678");
 
       var actual;
       resource.validate(function(err) {
@@ -128,7 +128,7 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
 
     it('should require VpcId', function() {
       var resource = new cn.Ec2.VpcGatewayAttachment("RouteTableAssoc");
-      resource.setInternetGatewayId("igw-123456");
+      resource.setInternetGatewayId("igw-12345678");
 
       var actual;
       resource.validate(function(err) {

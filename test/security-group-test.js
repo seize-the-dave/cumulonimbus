@@ -41,11 +41,11 @@ describe('AWS::EC2::SecurityGroup', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.SecurityGroup("MySecurityGroup");
-      resource.setVpcId("vpc-123456");
+      resource.setVpcId("vpc-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::SecurityGroup",
         "Properties": {
-          "VpcId": "vpc-123456"
+          "VpcId": "vpc-12345678"
         }
       });
     });
@@ -146,13 +146,13 @@ describe('AWS::EC2::SecurityGroup', function() {
       it('accepts string', function() {
         var resource = new cn.Ec2.SecurityGroup("MySecurityGroup");
         var egress = new cn.Ec2.SecurityGroup.Egress();
-        egress.setDestinationSecurityGroupId("sg-1234567");
+        egress.setDestinationSecurityGroupId("sg-12345678");
         resource.setSecurityGroupEgress([egress]);
         should(resource.toJson()).deepEqual({
           "Type": "AWS::EC2::SecurityGroup",
           "Properties": {
             "SecurityGroupEgress": [{
-              "DestinationSecurityGroupId": "sg-1234567"
+              "DestinationSecurityGroupId": "sg-12345678"
             }]
           }
         });
@@ -275,13 +275,13 @@ describe('AWS::EC2::SecurityGroup', function() {
       it('accepts string', function() {
         var resource = new cn.Ec2.SecurityGroup("MySecurityGroup");
         var ingress = new cn.Ec2.SecurityGroup.Ingress();
-        ingress.setSourceSecurityGroupId("sg-1234567");
+        ingress.setSourceSecurityGroupId("sg-12345678");
         resource.setSecurityGroupIngress([ingress]);
         should(resource.toJson()).deepEqual({
           "Type": "AWS::EC2::SecurityGroup",
           "Properties": {
             "SecurityGroupIngress": [{
-              "SourceSecurityGroupId": "sg-1234567"
+              "SourceSecurityGroupId": "sg-12345678"
             }]
           }
         });

@@ -28,11 +28,11 @@ describe('AWS::EC2::SubnetRouteTableAssociation', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
-      resource.setSubnetId("subnet-123456");
+      resource.setSubnetId("subnet-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::SubnetRouteTableAssociation",
         "Properties": {
-          "SubnetId": "subnet-123456"
+          "SubnetId": "subnet-12345678"
         }
       });
     });
@@ -62,11 +62,11 @@ describe('AWS::EC2::SubnetRouteTableAssociation', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
-      resource.setRouteTableId("rtb-123456");
+      resource.setRouteTableId("rtb-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::SubnetRouteTableAssociation",
         "Properties": {
-          "RouteTableId": "rtb-123456"
+          "RouteTableId": "rtb-12345678"
         }
       });
     });
@@ -82,7 +82,7 @@ describe('AWS::EC2::SubnetRouteTableAssociation', function() {
   describe('validation', function() {
     it('should require RouteTableId', function() {
       var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
-      resource.setSubnetId("subnet-123456");
+      resource.setSubnetId("subnet-12345678");
 
       var actual;
       resource.validate(function(err) {
@@ -94,7 +94,7 @@ describe('AWS::EC2::SubnetRouteTableAssociation', function() {
 
     it('should require SubnetId', function() {
       var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
-      resource.setRouteTableId("rtb-123456");
+      resource.setRouteTableId("rtb-12345678");
 
       var actual;
       resource.validate(function(err) {

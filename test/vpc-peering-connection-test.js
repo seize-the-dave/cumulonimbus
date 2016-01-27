@@ -43,11 +43,11 @@ describe('AWS::EC2::VPCPeeringConnection', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.VpcPeeringConnection("MyPeeringConnection");
-      resource.setVpcId("vpc-123456");
+      resource.setVpcId("vpc-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPCPeeringConnection",
         "Properties": {
-          "VpcId": "vpc-123456"
+          "VpcId": "vpc-12345678"
         }
       });
     });
@@ -77,11 +77,11 @@ describe('AWS::EC2::VPCPeeringConnection', function() {
 
     it('accepts string', function() {
       var resource = new cn.Ec2.VpcPeeringConnection("MyPeeringConnection");
-      resource.setPeerVpcId("vpc-123456");
+      resource.setPeerVpcId("vpc-12345678");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPCPeeringConnection",
         "Properties": {
-          "PeerVpcId": "vpc-123456"
+          "PeerVpcId": "vpc-12345678"
         }
       });
     });
@@ -97,7 +97,7 @@ describe('AWS::EC2::VPCPeeringConnection', function() {
   describe('validation', function() {
     it('should require VpcId', function() {
       var resource = new cn.Ec2.VpcPeeringConnection("MyPeeringConnection");
-      resource.setPeerVpcId("vpc-123456");
+      resource.setPeerVpcId("vpc-12345678");
 
       var actual;
       resource.validate(function(err) {
@@ -108,7 +108,7 @@ describe('AWS::EC2::VPCPeeringConnection', function() {
     });
     it('should require PeerVpcId', function() {
       var resource = new cn.Ec2.VpcPeeringConnection("MyPeeringConnection");
-      resource.setVpcId("vpc-123456");
+      resource.setVpcId("vpc-12345678");
 
       var actual;
       resource.validate(function(err) {
@@ -119,8 +119,8 @@ describe('AWS::EC2::VPCPeeringConnection', function() {
     });
     it('should validate valid object', function() {
       var resource = new cn.Ec2.VpcPeeringConnection("MyPeeringConnection");
-      resource.setVpcId("vpc-123456");
-      resource.setPeerVpcId("vpc-123456");
+      resource.setVpcId("vpc-12345678");
+      resource.setPeerVpcId("vpc-12345678");
 
       var actual;
       resource.validate(function(err) {
