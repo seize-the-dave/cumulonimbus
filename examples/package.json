@@ -4,6 +4,6 @@
     "vpc-example": "node vpc-example.js"
   },
   "dependencies": {
-    "cumulonimbus": "*"
+    "cumulonimbus": "0.5.1"
   }
 }

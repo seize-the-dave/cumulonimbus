@@ -49,7 +49,9 @@ template.addResource(instance);
 template.validate(function(err) {
   if (err === undefined) {
     console.log(JSON.stringify(template.toJson(), null, 4));
+    process.exit();
   } else {
     console.error(err);
+    process.exit(1);
   }
 });
