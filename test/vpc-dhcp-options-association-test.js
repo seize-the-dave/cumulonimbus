@@ -40,7 +40,7 @@ describe('AWS::EC2::VPCDHCPOptionsAssociation', function() {
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
       should.throws(function() {
-        resource.setVpcId("cloud-123456")
+        resource.setVpcId("cloud-123456");
       });
     });
   });

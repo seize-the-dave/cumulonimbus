@@ -1,9 +1,19 @@
 var cn = require('../lib/cumulonimbus');
 
 var template = new cn.Template();
+
 var vpc = new cn.Ec2.Vpc("MyVpc");
 vpc.setCidrBlock("10.1.0.0/16");
 template.addResource(vpc);
+
+var secondaryVpc = new cn.Ec2.Vpc("SecondaryVpc");
+secondaryVpc.setCidrBlock("10.2.0.0/16");
+template.addResource(secondaryVpc);
+
+var peeringConnection = new cn.Ec2.VpcPeeringConnection("MyPeeringConnection");
+peeringConnection.setVpcId(vpc);
+peeringConnection.setPeerVpcId(secondaryVpc);
+template.addResource(peeringConnection);
 
 var dhcpOptions = new cn.Ec2.DhcpOptions("MyDhcpOptions");
 dhcpOptions.setDomainNameServers(["10.0.0.1"]);
