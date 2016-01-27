@@ -1,5 +1,5 @@
 var should = require('should'),
-    cn = require('../lib/cumulonimbus');
+  cn = require('../lib/cumulonimbus');
 
 describe('AWS::EC2::DHCPOptions', function() {
   describe('New Instance', function() {
@@ -94,16 +94,43 @@ describe('AWS::EC2::DHCPOptions', function() {
   describe('validation', function() {
     it('should require DomainNameServers, NetbiosNameServers or NtpServers', function() {
       var resource = new cn.Ec2.DhcpOptions("DhcpOptions");
+
+      var actual;
       resource.validate(function(err) {
-        should.exist(err);
-      })
+        actual = err;
+      });
+      should.exist(actual);
     });
     it('should require NetbiosNodeType if NetbiosNameServers is set', function() {
       var resource = new cn.Ec2.DhcpOptions("DhcpOptions");
       resource.setNetbiosNameServers(["10.0.0.1"]);
+
+      var actual;
       resource.validate(function(err) {
-        should.exist(err);
-      })
+        actual = err;
+      });
+      should.exist(actual);
+    });
+    it('should allow options with Netbios config', function() {
+      var resource = new cn.Ec2.DhcpOptions("DhcpOptions");
+      resource.setNetbiosNameServers(["10.0.0.1"]);
+      resource.setNetbiosNodeType(1);
+
+      var actual;
+      resource.validate(function(err) {
+        actual = err;
+      });
+      should.not.exist(actual);
+    });
+    it('should allow options with only DomainNameServers', function() {
+      var resource = new cn.Ec2.DhcpOptions("DhcpOptions");
+      resource.setDomainNameServers(["10.0.0.1"]);
+
+      var actual;
+      resource.validate(function(err) {
+        actual = err;
+      });
+      should.not.exist(actual);
     });
   });
 });

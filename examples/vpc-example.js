@@ -6,7 +6,8 @@ vpc.setCidrBlock("10.1.0.0/16");
 template.addResource(vpc);
 
 var dhcpOptions = new cn.Ec2.DhcpOptions("MyDhcpOptions");
-dhcpOptions.setDomainNameServers(["10.0.0.1"])
+dhcpOptions.setDomainNameServers(["10.0.0.1"]);
+dhcpOptions.setNtpServers(["10.0.0.1"]);
 template.addResource(dhcpOptions);
 
 var vpcDhcpOptionsAssoc = new cn.Ec2.VpcDhcpOptionsAssociation("MyVpcDhcpOptionsAssoc");

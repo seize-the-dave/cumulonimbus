@@ -351,10 +351,24 @@ describe('AWS::EC2::SecurityGroup', function() {
   describe('validation', function() {
     it('should require GroupDescription', function() {
       var resource = new cn.Ec2.SecurityGroup("MySecurityGroup");
+
+      var actual;
       resource.validate(function(err) {
-        should.exist(err);
-        err.message.should.containEql("GroupDescription");
-      })
+        actual = err;
+      });
+      should.exist(actual);
+      actual.message.should.containEql("GroupDescription");
+    });
+
+    it('should allow valid group', function() {
+      var resource = new cn.Ec2.SecurityGroup("MySecurityGroup");
+      resource.setGroupDescription("Example");
+
+      var actual;
+      resource.validate(function(err) {
+        actual = err;
+      });
+      should.not.exist(actual);
     });
   });
 });

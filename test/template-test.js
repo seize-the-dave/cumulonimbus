@@ -26,16 +26,22 @@ describe('Template', function() {
       var vpc = new cn.Ec2.Vpc("VPC");
       vpc.setCidrBlock("10.0.0.0/16");
       template.addResource(vpc);
+
+      var actual;
       template.validate(function(err) {
-        should.not.exist(err);
+        actual = err;
       });
+      should.not.exist(actual);
     });
     it("then it should return an error for an incomplete resource", function() {
       var template = new cn.Template();
       template.addResource(new cn.Ec2.Vpc("VPC"));
+
+      var actual;
       template.validate(function(err) {
-        should.exist(err);
+        actual = err;
       });
+      should.exist(actual);
     });
   });
 

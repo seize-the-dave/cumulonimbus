@@ -109,19 +109,25 @@ describe('AWS::EC2::Subnet', function() {
     it('should require CidrBlock', function() {
       var resource = new cn.Ec2.Subnet("Subnet");
       resource.setVpcId("vpc-123456");
+
+      var actual;
       resource.validate(function(err) {
-        should.exist(err);
-        err.message.should.containEql("CidrBlock");
-      })
+        actual = err;
+      });
+      should.exist(actual);
+      actual.message.should.containEql("CidrBlock");
     });
 
     it('should require VpcId', function() {
       var resource = new cn.Ec2.Subnet("Subnet");
       resource.setCidrBlock("10.0.0.0/16");
+
+      var actual;
       resource.validate(function(err) {
-        should.exist(err);
-        err.message.should.containEql("VpcId");
-      })
+        actual = err;
+      });
+      should.exist(actual);
+      actual.message.should.containEql("VpcId");
     });
   });
 });

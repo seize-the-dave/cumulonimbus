@@ -64,10 +64,24 @@ describe('AWS::EC2::RouteTable', function() {
   describe('validation', function() {
     it('should require VpcId', function() {
       var resource = new cn.Ec2.RouteTable("RouteTable");
+
+      var actual;
       resource.validate(function(err) {
-        should.exist(err);
-        err.message.should.containEql("VpcId");
-      })
+        actual = err;
+      });
+      should.exist(actual);
+      actual.message.should.containEql("VpcId");
+    });
+
+    it('should allow valid object', function() {
+      var resource = new cn.Ec2.RouteTable("RouteTable");
+      resource.setVpcId("vpc-123456");
+
+      var actual;
+      resource.validate(function(err) {
+        actual = err;
+      });
+      should.not.exist(actual);
     });
   });
 });

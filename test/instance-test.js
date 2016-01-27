@@ -700,10 +700,24 @@ describe('AWS::EC2::Instance', function() {
   describe('validation', function() {
     it('should require ImageId', function() {
       var resource = new cn.Ec2.Instance("MyInstance");
+
+      var actual;
       resource.validate(function(err) {
-        should.exist(err);
-        err.message.should.containEql("ImageId");
-      })
+        actual = err;
+      });
+      should.exist(actual);
+      actual.message.should.containEql("ImageId");
+    });
+
+    it('should allow valid instance', function() {
+      var resource = new cn.Ec2.Instance("MyInstance");
+      resource.setImageId("ami-1234567");
+
+      var actual;
+      resource.validate(function(err) {
+        actual = err;
+      });
+      should.not.exist(actual);
     });
   });
 });
