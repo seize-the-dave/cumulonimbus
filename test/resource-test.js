@@ -24,4 +24,13 @@ describe('Resource', function() {
       });
     });
   });
+
+  describe('get reference', function() {
+    it('should return a JSON object', function() {
+      var resource = new Resource("MyResource", "AWS::EC2::VPC");
+      should(resource.getRef()).deepEqual({
+        "Ref": "MyResource"
+      });
+    });
+  });
 });
