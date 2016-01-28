@@ -67,7 +67,7 @@ template.addResource(eipAssoc);
 
 template.validate(function(err) {
   if (err === undefined) {
-    console.log(JSON.stringify(template.toJson(), null, 4));
+    console.log(template.toJson());
   } else {
     console.error(err);
     process.exit(1);

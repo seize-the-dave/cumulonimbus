@@ -4,6 +4,7 @@
     "vpc-example": "node vpc-example.js"
   },
   "dependencies": {
+    "aws-sdk": "^2.2.32",
     "cumulonimbus": "0.5.1"
   }
 }
