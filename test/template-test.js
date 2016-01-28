@@ -5,7 +5,7 @@ describe('Template', function() {
   describe('when instantiating an empty template', function() {
     it('should only provide a value for the template format version', function() {
       var template = new cn.Template();
-      should(template.toJson()).deepEqual({
+      should(JSON.parse(template.toJson())).deepEqual({
         "AWSTemplateFormatVersion": "2010-09-09"
       });
     });
@@ -49,7 +49,8 @@ describe('Template', function() {
     it("should contain that resource in the JSON output", function() {
       var template = new cn.Template();
       template.addResource(new cn.Ec2.Vpc("VPC"));
-      should(template.toJson()).containEql({
+      should(JSON.parse(template.toJson())).deepEqual({
+        "AWSTemplateFormatVersion": "2010-09-09",
         "Resources": {
           "VPC": {
             "Type": "AWS::EC2::VPC"
