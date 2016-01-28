@@ -143,9 +143,9 @@ describe('AWS::EC2::Instance', function() {
           var resource = new cn.Ec2.Instance("Instance");
           var bdm = new cn.Ec2.Instance.BlockDeviceMapping();
           var ebs = new cn.Ec2.Instance.BlockDeviceMapping.BlockStore();
-          should.throws(function() {
+          (function() {
             ebs.setSnapshotId("snp-1234567");
-          });
+          }).should.throw(/snap-/);
         });
       });
 
@@ -320,9 +320,9 @@ describe('AWS::EC2::Instance', function() {
     });
     it('reject malformed AMI', function() {
       var resource = new cn.Ec2.Instance("Instance");
-      should.throws(function() {
+      (function() {
         resource.setImageId("img-1234567");
-      });
+      }).should.throw(/ami-/);
     });
   });
 
@@ -384,9 +384,9 @@ describe('AWS::EC2::Instance', function() {
 
     it('reject invalid kernel ID', function() {
       var resource = new cn.Ec2.Instance("Instance");
-      should.throws(function() {
+      (function() {
         resource.setKernelId("kernel-6a0cf803");
-      });
+      }).should.throw(/aki-/);
     });
   });
 
@@ -443,9 +443,9 @@ describe('AWS::EC2::Instance', function() {
 
     it('rejects malformed Ramdisk ID', function() {
       var resource = new cn.Ec2.Instance("Instance");
-      should.throws(function() {
+      (function() {
         resource.setRamdiskId("disk-aa6348de");
-      });
+      }).should.throw(/ari-/);
     });
   });
 
@@ -478,9 +478,9 @@ describe('AWS::EC2::Instance', function() {
 
     it('rejects single malformed string', function() {
       var resource = new cn.Ec2.Instance("Instance");
-      should.throws(function() {
+      (function() {
         resource.setSecurityGroupIds("group-1234567");
-      });
+      }).should.throw(/sg-/);
     });
 
     it('accepts multiple references', function() {
@@ -514,9 +514,9 @@ describe('AWS::EC2::Instance', function() {
 
     it('rejects multiple malformed strings', function() {
       var resource = new cn.Ec2.Instance("Instance");
-      should.throws(function() {
+      (function() {
         resource.setSecurityGroupIds(["group-1234567", "group-2345678"]);
-      });
+      }).should.throw(/sg-/);
     });
 
     it('accepts multiple mixed types', function() {
@@ -645,9 +645,9 @@ describe('AWS::EC2::Instance', function() {
 
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.Instance("MyInstance");
-      should.throws(function() {
+      (function() {
         resource.setSubnetId("net-123456");
-      });
+      }).should.throw(/subnet-/);
     });
   });
 

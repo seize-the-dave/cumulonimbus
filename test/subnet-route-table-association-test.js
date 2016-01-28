@@ -39,9 +39,9 @@ describe('AWS::EC2::SubnetRouteTableAssociation', function() {
 
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
-      should.throws(function() {
+      (function() {
         resource.setSubnetId("net-123456");
-      });
+      }).should.throw(/subnet-/);
     });
   });
 
@@ -73,9 +73,9 @@ describe('AWS::EC2::SubnetRouteTableAssociation', function() {
 
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.SubnetRouteTableAssociation("RouteTableAssoc");
-      should.throws(function() {
+      (function() {
         resource.setRouteTableId("table-123456");
-      });
+      }).should.throw(/rtb-/);
     });
   });
 

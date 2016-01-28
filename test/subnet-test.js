@@ -84,9 +84,9 @@ describe('AWS::EC2::Subnet', function() {
     it('rejected malformed string', function() {
       var vpc = new cn.Ec2.Vpc("VPC");
       var subnet = new cn.Ec2.Subnet("Subnet");
-      should.throws(function() {
+      (function() {
         subnet.setVpcId("cloud-123456");
-      });
+      }).should.throw(/vpc-/);
     });
   });
 

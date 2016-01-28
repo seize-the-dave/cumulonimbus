@@ -58,9 +58,9 @@ describe('AWS::EC2::EIP', function() {
     it('should reject invalid string', function() {
       var resource = new cn.Ec2.Eip("MyElasticIP");
       var instance = new cn.Ec2.Instance("MyInstance");
-      should.throws(function() {
+      (function() {
         resource.setInstanceId("intance-123456");
-      });
+      }).should.throw(/i-/);
     });
   });
 });

@@ -39,9 +39,9 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
 
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.VpcGatewayAttachment("Attachment");
-      should.throws(function() {
+      (function() {
         resource.setVpcId("cloud-123456");
-      });
+      }).should.throw(/vpc-/);
     });
   });
 
@@ -73,9 +73,9 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
 
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.VpcGatewayAttachment("RouteTableAssoc");
-      should.throws(function() {
+      (function() {
         resource.setInternetGatewayId("gateway-123456");
-      });
+      }).should.throw(/igw-/);
     });
   });
 
@@ -107,9 +107,9 @@ describe('AWS::EC2::VPCGatewayAttachment', function() {
 
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.VpcGatewayAttachment("RouteTableAssoc");
-      should.throws(function() {
+      (function() {
         resource.setVpnGatewayId("gateway-12345678");
-      });
+      }).should.throw(/vgw-/);
     });
   });
 

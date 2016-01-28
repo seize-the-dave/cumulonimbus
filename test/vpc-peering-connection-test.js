@@ -54,9 +54,9 @@ describe('AWS::EC2::VPCPeeringConnection', function() {
 
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.VpcPeeringConnection("MyPeeringConnection");
-      should.throws(function() {
+      (function() {
         resource.setVpcId("cloud-123456");
-      });
+      }).should.throw(/vpc-/);
     });
   });
 
@@ -88,9 +88,9 @@ describe('AWS::EC2::VPCPeeringConnection', function() {
 
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.VpcPeeringConnection("MyPeeringConnection");
-      should.throws(function() {
+      (function() {
         resource.setPeerVpcId("cloud-123456");
-      });
+      }).should.throw(/vpc-/);
     });
   });
 

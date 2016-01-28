@@ -39,9 +39,9 @@ describe('AWS::EC2::VPCDHCPOptionsAssociation', function() {
 
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
-      should.throws(function() {
+      (function() {
         resource.setVpcId("cloud-123456");
-      });
+      }).should.throw(/vpc-/);
     });
   });
 
@@ -73,9 +73,9 @@ describe('AWS::EC2::VPCDHCPOptionsAssociation', function() {
 
     it('rejects malformed string', function() {
       var resource = new cn.Ec2.VpcDhcpOptionsAssociation("VpcDhcpOptionsAssociation");
-      should.throws(function() {
+      (function() {
         resource.setDhcpOptionsId("dhcp-123456");
-      });
+      }).should.throw(/dopt-/);
     });
   });
 

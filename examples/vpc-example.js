@@ -53,18 +53,21 @@ securityGroup.setVpcId(vpc);
 template.addResource(securityGroup);
 
 var instance = new cn.Ec2.Instance("MyInstance");
-instance.setImageId("ami-1234567");
+instance.setImageId("ami-12345678");
 instance.setSecurityGroupIds(securityGroup);
 template.addResource(instance);
 
 var eip = new cn.Ec2.Eip("MyElasticIP");
-eip.setInstanceId(instance);
 template.addResource(eip);
+
+var eipAssoc = new cn.Ec2.EipAssociation("MyElasticIPAssociation");
+eipAssoc.setAllocationId(eip);
+eipAssoc.setInstanceId(instance);
+template.addResource(eipAssoc);
 
 template.validate(function(err) {
   if (err === undefined) {
     console.log(JSON.stringify(template.toJson(), null, 4));
-    process.exit();
   } else {
     console.error(err);
     process.exit(1);

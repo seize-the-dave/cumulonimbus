@@ -52,9 +52,9 @@ describe('AWS::EC2::SecurityGroup', function() {
 
     it('rejected malformed string', function() {
       var resource = new cn.Ec2.SecurityGroup("MySecurityGroup");
-      should.throws(function() {
+      (function() {
         resource.setVpcId("cloud-123456");
-      });
+      }).should.throw(/vpc-/);
     });
   });
 
@@ -161,9 +161,9 @@ describe('AWS::EC2::SecurityGroup', function() {
       it('rejects malformed string', function() {
         var resource = new cn.Ec2.SecurityGroup("MySecurityGroup");
         var egress = new cn.Ec2.SecurityGroup.Egress();
-        should.throws(function() {
+        (function() {
           egress.setDestinationSecurityGroupId("group-1234567");
-        });
+        }).should.throw(/sg-/);
       });
     });
 
@@ -290,9 +290,9 @@ describe('AWS::EC2::SecurityGroup', function() {
       it('rejects malformed string', function() {
         var resource = new cn.Ec2.SecurityGroup("MySecurityGroup");
         var egress = new cn.Ec2.SecurityGroup.Ingress();
-        should.throws(function() {
+        (function() {
           egress.setSourceSecurityGroupId("group-1234567");
-        });
+        }).should.throw(/sg-/);
       });
     });
 
