@@ -5,6 +5,6 @@
   },
   "dependencies": {
     "aws-sdk": "^2.2.32",
-    "cumulonimbus": "^0.10.0"
+    "cumulonimbus": "^0.10.1"
   }
 }
