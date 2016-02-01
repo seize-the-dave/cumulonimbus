@@ -1,10 +1,20 @@
-var cn = require('cumulonimbus');
+var cn = require('../lib/cumulonimbus');
 var AWS = require('aws-sdk');
 
 var template = new cn.Template();
 var user = new cn.Iam.User("MyUser");
 user.setPath("/dgrant2/");
 template.addResource(user);
+
+var managedPolicy = new cn.Iam.ManagedPolicy("MyManagedPolicy");
+var doc = new cn.Iam.PolicyDocument();
+var stmt = new cn.Iam.PolicyDocument.Statement();
+stmt.setAction("*");
+stmt.setEffect("Allow");
+stmt.setResource("*");
+doc.addStatement(stmt);
+managedPolicy.setPolicyDocument(doc);
+template.addResource(managedPolicy);
 
 var access = new cn.Iam.AccessKey("MyAccessKey");
 access.setUserName(user.getRef());
@@ -26,5 +36,7 @@ template.validate(function(err) {
         console.error(err);
       }
     });
+  } else {
+    console.log(err);
   }
 });

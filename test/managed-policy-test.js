@@ -101,6 +101,39 @@ describe('AWS::IAM::ManagedPolicy', function() {
     });
   });
 
+  describe('validate', function() {
+    it('should fail without PolicyDocument', function() {
+      var resource = new cn.Iam.ManagedPolicy("MyManagedPolicy");
+      resource.setUsers([
+        "mystack-myuser-1CCXAFG2H2U4D"
+      ]);
+      var actual;
+      resource.validate(function(err) {
+        actual = err;
+      });
+      should.exist(actual);
+      actual.message.should.containEql("PolicyDocument");
+    });
+
+    it('should pass with all valid fields', function() {
+      var resource = new cn.Iam.ManagedPolicy("MyManagedPolicy");
+      var doc = new cn.Iam.PolicyDocument();
+      var stmt = new cn.Iam.PolicyDocument.Statement();
+      stmt.setSid("1");
+      stmt.setEffect("Allow");
+      stmt.setAction("s3:*");
+      stmt.setResource("*");
+      doc.addStatement(stmt);
+      resource.setPolicyDocument(doc);
+
+      var actual;
+      resource.validate(function(err) {
+        actual = err;
+      });
+      should.not.exist(actual);
+    });
+  });
+
   describe('Roles', function() {
     it('should accept string array', function() {
       var resource = new cn.Iam.ManagedPolicy("MyManagedPolicy");
