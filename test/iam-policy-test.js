@@ -110,8 +110,7 @@ describe('Policy', function() {
         var policy = new Policy();
         var statement = new Policy.Statement();
         (function() {
-          statement.setPrincipal({
-          });
+          statement.setPrincipal({});
         }).should.throw(/Principal/);
       });
 
@@ -395,8 +394,7 @@ describe('Policy', function() {
         var policy = new Policy();
         var statement = new Policy.Statement();
         (function() {
-          statement.setNotPrincipal({
-          });
+          statement.setNotPrincipal({});
         }).should.throw(/Principal/);
       });
 
@@ -663,6 +661,165 @@ describe('Policy', function() {
             ]
           });
         }).should.throw(/Principal/);
+      });
+    });
+
+    describe('Action', function() {
+      it('should accept a single action', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        statement.setAction("sqs:SendMessage");
+        policy.addStatement(statement);
+        should(policy.toJson()).deepEqual({
+          "Version": "2012-10-17",
+          "Statement": [{
+            "Action": "sqs:SendMessage"
+          }]
+        });
+      });
+    });
+
+    describe('NotAction', function() {
+      it('should accept a single action', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        statement.setNotAction("sqs:SendMessage");
+        policy.addStatement(statement);
+        should(policy.toJson()).deepEqual({
+          "Version": "2012-10-17",
+          "Statement": [{
+            "NotAction": "sqs:SendMessage"
+          }]
+        });
+      });
+    });
+
+    describe('Resource', function() {
+      it('should accept a single resource', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        statement.setResource("arn:aws:sqs:us-west-2:123456789012:queue1");
+        policy.addStatement(statement);
+        should(policy.toJson()).deepEqual({
+          "Version": "2012-10-17",
+          "Statement": [{
+            "Resource": "arn:aws:sqs:us-west-2:123456789012:queue1"
+          }]
+        });
+      });
+
+      it('should accept a multiple resources', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        statement.setResource([
+          "arn:aws:dynamodb:us-west-2:123456789012:table/books_table",
+          "arn:aws:dynamodb:us-west-2:123456789012:table/magazines_table"
+        ]);
+        policy.addStatement(statement);
+        should(policy.toJson()).deepEqual({
+          "Version": "2012-10-17",
+          "Statement": [{
+            "Resource": [
+              "arn:aws:dynamodb:us-west-2:123456789012:table/books_table",
+              "arn:aws:dynamodb:us-west-2:123456789012:table/magazines_table"
+            ]
+          }]
+        });
+      });
+
+      it('should reject a mixed array of ARN- and non-ARN strings', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        (function() {
+          statement.setResource([
+            "arn:aws:dynamodb:us-west-2:123456789012:table/books_table",
+            "invalid"
+          ]);
+        }).should.throw(/Invalid ARN/);
+      });
+
+      it('should reject a non-ARN string', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        (function() {
+          statement.setResource("invalid");
+        }).should.throw(/Invalid ARN/);
+      });
+    });
+
+    describe('NotResource', function() {
+      it('should accept a single resource', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        statement.setNotResource("arn:aws:sqs:us-west-2:123456789012:queue1");
+        policy.addStatement(statement);
+        should(policy.toJson()).deepEqual({
+          "Version": "2012-10-17",
+          "Statement": [{
+            "NotResource": "arn:aws:sqs:us-west-2:123456789012:queue1"
+          }]
+        });
+      });
+
+      it('should accept a multiple resources', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        statement.setNotResource([
+          "arn:aws:dynamodb:us-west-2:123456789012:table/books_table",
+          "arn:aws:dynamodb:us-west-2:123456789012:table/magazines_table"
+        ]);
+        policy.addStatement(statement);
+        should(policy.toJson()).deepEqual({
+          "Version": "2012-10-17",
+          "Statement": [{
+            "NotResource": [
+              "arn:aws:dynamodb:us-west-2:123456789012:table/books_table",
+              "arn:aws:dynamodb:us-west-2:123456789012:table/magazines_table"
+            ]
+          }]
+        });
+      });
+
+      it('should reject a mixed array of ARN- and non-ARN strings', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        (function() {
+          statement.setNotResource([
+            "arn:aws:dynamodb:us-west-2:123456789012:table/books_table",
+            "invalid"
+          ]);
+        }).should.throw(/Invalid ARN/);
+      });
+
+      it('should reject a non-ARN string', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        (function() {
+          statement.setNotResource("invalid");
+        }).should.throw(/Invalid ARN/);
+      });
+    });
+
+    describe('Condition', function() {
+      it('should accept a single condition', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        statement.setCondition({
+          "DateGreaterThan": {
+            "aws:CurrentTime": "2013-12-15T12:00:00Z"
+          }
+        });
+        policy.addStatement(statement);
+        should(policy.toJson()).deepEqual({
+          "Version": "2012-10-17",
+          "Statement": [{
+            "Condition": {
+              "DateGreaterThan": {
+                "aws:CurrentTime": "2013-12-15T12:00:00Z"
+              }
+            }
+          }]
+        });
       });
     });
   });
