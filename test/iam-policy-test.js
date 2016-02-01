@@ -1,7 +1,7 @@
 var should = require('should'),
-  Policy = require('../lib/Iam').Policy;
+  Policy = require('../lib/Iam').PolicyDocument;
 
-describe('Policy', function() {
+describe('PolicyDocument', function() {
   describe('New Instance', function() {
     it('should contain a version', function() {
       var policy = new Policy();
