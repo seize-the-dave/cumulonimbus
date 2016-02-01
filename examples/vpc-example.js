@@ -1,4 +1,4 @@
-var cn = require('../lib/cumulonimbus');
+var cn = require('cumulonimbus');
 
 var template = new cn.Template();
 
