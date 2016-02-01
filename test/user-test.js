@@ -31,13 +31,20 @@ describe('AWS::IAM::User', function() {
   describe('Path', function() {
     it('should accept string', function() {
       var resource = new cn.Iam.User("MyUser");
-      resource.setPath("/fred");
+      resource.setPath("/fred/");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::IAM::User",
         "Properties": {
-          "Path": "/fred"
+          "Path": "/fred/"
         }
       });
+    });
+
+    it('should reject invalid characters', function() {
+      var resource = new cn.Iam.User("MyUser");
+      (function() {
+        resource.setPath("/fred");
+      }).should.throw(/Path/);
     });
   });
 
