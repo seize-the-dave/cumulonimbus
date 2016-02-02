@@ -59,4 +59,15 @@ describe('Template', function() {
       });
     });
   });
+
+  describe('Description', function() {
+    it("should accept string", function() {
+      var template = new cn.Template();
+      template.setDescription("example");
+      should(JSON.parse(template.toJson())).deepEqual({
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "example"
+      });
+    });
+  });
 });

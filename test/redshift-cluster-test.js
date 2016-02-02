@@ -49,4 +49,17 @@ describe('AWS::Redshift::Cluster', function() {
       });
     });
   });
+
+  describe('ClusterParameterGroupName', function() {
+    it('should accept string', function() {
+      var resource = new cn.Redshift.Cluster("MyCluster");
+      resource.setClusterParameterGroupName("MyParameterGroup");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::Redshift::Cluster",
+        "Properties": {
+          "ClusterParameterGroupName": "MyParameterGroup",
+        }
+      });
+    });
+  });
 });
