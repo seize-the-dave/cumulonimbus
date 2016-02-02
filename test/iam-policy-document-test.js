@@ -1,5 +1,6 @@
 var should = require('should'),
-  Policy = require('../lib/Iam').PolicyDocument;
+    cn = require('../lib/cumulonimbus');
+  Policy = cn.Iam.PolicyDocument;
 
 describe('PolicyDocument', function() {
   describe('New Instance', function() {
