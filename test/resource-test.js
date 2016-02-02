@@ -34,6 +34,16 @@ describe('Resource', function() {
         "DependsOn": "Example"
       });
     });
+
+    it('should accept a resource', function() {
+      var resource = new Resource("MyResoure", "AWS::EC2::VPC");
+      var dep = new Resource("MyDependency", "AWS::EC2::Instance")
+      resource.dependsOn(dep);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::VPC",
+        "DependsOn": "MyDependency"
+      });
+    });
   });
 
   describe('get reference', function() {
