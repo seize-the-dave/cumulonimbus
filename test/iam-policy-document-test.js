@@ -699,6 +699,22 @@ describe('PolicyDocument', function() {
       it('should accept a single resource', function() {
         var policy = new Policy();
         var statement = new Policy.Statement();
+        var vpc = new cn.Ec2.Vpc("MyVpc");
+        statement.setResource(vpc);
+        policy.addStatement(statement);
+        should(policy.toJson()).deepEqual({
+          "Version": "2012-10-17",
+          "Statement": [{
+            "Resource": {
+              "Ref": "MyVpc"
+            }
+          }]
+        });
+      });
+
+      it('should accept a single ARN', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
         statement.setResource("arn:aws:sqs:us-west-2:123456789012:queue1");
         policy.addStatement(statement);
         should(policy.toJson()).deepEqual({
@@ -709,7 +725,7 @@ describe('PolicyDocument', function() {
         });
       });
 
-      it('should accept a multiple resources', function() {
+      it('should accept multiple ARNs', function() {
         var policy = new Policy();
         var statement = new Policy.Statement();
         statement.setResource([
@@ -749,7 +765,7 @@ describe('PolicyDocument', function() {
     });
 
     describe('NotResource', function() {
-      it('should accept a single resource', function() {
+      it('should accept a single ARN', function() {
         var policy = new Policy();
         var statement = new Policy.Statement();
         statement.setNotResource("arn:aws:sqs:us-west-2:123456789012:queue1");
@@ -762,7 +778,7 @@ describe('PolicyDocument', function() {
         });
       });
 
-      it('should accept a multiple resources', function() {
+      it('should accept multiple ARNs', function() {
         var policy = new Policy();
         var statement = new Policy.Statement();
         statement.setNotResource([
