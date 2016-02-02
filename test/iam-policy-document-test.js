@@ -712,6 +712,22 @@ describe('PolicyDocument', function() {
         });
       });
 
+      it('should accept a single intrinsic function', function() {
+        var policy = new Policy();
+        var statement = new Policy.Statement();
+        var queue = new cn.Sqs.Queue("MyQueue");
+        statement.setResource(queue.getAtt("Arn"));
+        policy.addStatement(statement);
+        should(policy.toJson()).deepEqual({
+          "Version": "2012-10-17",
+          "Statement": [{
+            "Resource": {
+              "Fn::GetAtt": ["MyQueue", "Arn"]
+            }
+          }]
+        });
+      });
+
       it('should accept a single ARN', function() {
         var policy = new Policy();
         var statement = new Policy.Statement();
