@@ -25,6 +25,17 @@ describe('Resource', function() {
     });
   });
 
+  describe('DependsOn', function() {
+    it('should accept a string', function() {
+      var resource = new Resource("MyResoure", "AWS::EC2::VPC");
+      resource.dependsOn("Example");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::VPC",
+        "DependsOn": "Example"
+      });
+    });
+  });
+
   describe('get reference', function() {
     it('should return a JSON object', function() {
       var resource = new Resource("MyResource", "AWS::EC2::VPC");
