@@ -60,6 +60,21 @@ describe('Template', function() {
     });
   });
 
+  describe('when adding a parameter to a template', function() {
+    it("should contain that parameter in the JSON output", function() {
+      var template = new cn.Template();
+      template.addParameter(new cn.Parameter("MyParameter", "Number"));
+      should(JSON.parse(template.toJson())).deepEqual({
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Parameters": {
+          "MyParameter": {
+            "Type": "Number"
+          }
+        }
+      });
+    });
+  });
+
   describe('Description', function() {
     it("should accept string", function() {
       var template = new cn.Template();
