@@ -1,5 +1,6 @@
-var should = require('should'),
-    Resource = require('../lib/Resource').Resource;
+var should = require('should');
+var Resource = require('../lib/Resource').Resource;
+var cn = require('../lib/cumulonimbus');
 
 describe('Resource', function() {
   describe('New Instance', function() {
@@ -51,6 +52,27 @@ describe('Resource', function() {
       var resource = new Resource("MyResource", "AWS::EC2::VPC");
       should(resource.getRef()).deepEqual({
         "Ref": "MyResource"
+      });
+    });
+  });
+
+  describe('Condition', function() {
+    it('should accept a condition object', function() {
+      var resource = new Resource("MyResource", "AWS::EC2::VPC");
+      var cond = new cn.Condition("MyCondition", cn.Fn.Equals("0", "0"));
+      resource.setCondition(cond);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::VPC",
+        "Condition": "MyCondition"
+      });
+    });
+
+    it('should accept a string', function() {
+      var resource = new Resource("MyResource", "AWS::EC2::VPC");
+      resource.setCondition("MyCondition");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::VPC",
+        "Condition": "MyCondition"
       });
     });
   });
