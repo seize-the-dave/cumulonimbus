@@ -1,5 +1,5 @@
 var should = require('should'),
-    cn = require('../lib/cumulonimbus');
+  cn = require('../lib/cumulonimbus');
 
 describe('Template', function() {
   describe('when instantiating an empty template', function() {
@@ -69,6 +69,25 @@ describe('Template', function() {
         "Parameters": {
           "MyParameter": {
             "Type": "Number"
+          }
+        }
+      });
+    });
+  });
+
+  describe('when adding a condition to a template', function() {
+    it("should contain that condition in the JSON output", function() {
+      var template = new cn.Template();
+      var param = new cn.Parameter("MyParameter", "String");
+      template.addCondition(new cn.Condition("MyCondition", cn.Fn.Equals(param, "Example")));
+      should(JSON.parse(template.toJson())).deepEqual({
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Conditions": {
+          "MyCondition": {
+            "Fn::Equals": [
+              {"Ref":"MyParameter"},
+              "Example"
+            ]
           }
         }
       });
