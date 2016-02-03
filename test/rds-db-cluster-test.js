@@ -115,14 +115,14 @@ describe('AWS::RDS::DBCluster', function() {
     });
   });
 
-  describe('MasterPassword', function() {
+  describe('MasterUserPassword', function() {
     it('should accept string', function() {
       var resource = new cn.Rds.DbCluster("MyDbCluster");
-      resource.setMasterPassword("secret");
+      resource.setMasterUserPassword("secret");
       should(resource.toJson()).deepEqual({
         "Type": "AWS::RDS::DBCluster",
         "Properties": {
-          "MasterPassword": "secret"
+          "MasterUserPassword": "secret"
         }
       });
     });
