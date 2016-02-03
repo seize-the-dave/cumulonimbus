@@ -70,4 +70,58 @@ describe('Template', function() {
       });
     });
   });
+
+  describe('AWS::AccountId', function() {
+    it("should return reference", function() {
+      var template = new cn.Template();
+      should(template.getAccountId()).deepEqual({
+        "Ref": "AWS::AccountId"
+      });
+    });
+  });
+
+  describe('AWS::NotificationARNs', function() {
+    it("should return reference", function() {
+      var template = new cn.Template();
+      should(template.getNotificationArns()).deepEqual({
+        "Ref": "AWS::NotificationARNs"
+      });
+    });
+  });
+
+  describe('AWS::NoValue', function() {
+    it("should return reference", function() {
+      var template = new cn.Template();
+      should(template.getNoValue()).deepEqual({
+        "Ref": "AWS::NoValue"
+      });
+    });
+  });
+
+  describe('AWS::Region', function() {
+    it("should return reference", function() {
+      var template = new cn.Template();
+      should(template.getRegion()).deepEqual({
+        "Ref": "AWS::Region"
+      });
+    });
+  });
+
+  describe('AWS::StackId', function() {
+    it("should return reference", function() {
+      var template = new cn.Template();
+      should(template.getStackId()).deepEqual({
+        "Ref": "AWS::StackId"
+      });
+    });
+  });
+
+  describe('AWS::StackName', function() {
+    it("should return reference", function() {
+      var template = new cn.Template();
+      should(template.getStackName()).deepEqual({
+        "Ref": "AWS::StackName"
+      });
+    });
+  });
 });
