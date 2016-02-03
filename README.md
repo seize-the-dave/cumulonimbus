@@ -9,16 +9,10 @@ Cumulonimbus is a Node.js library for creating AWS CloudFormation templates prog
 * AWS::EC2::DHCPOptions
 * AWS::EC2::EIP
 * AWS::EC2::EIPAssociation
-* AWS::EC2::Instance, except:
- * IamInstanceProfile
- * NetworkInterfaces
- * PlacementGroupName
- * SsmAssociations
- * UserData
- * Volumes
- * AdditionalInfo
+* AWS::EC2::Instance
 * AWS::EC2::InternetGateway
 * AWS::EC2::PlacementGroup
+* AWS::EC2::Route
 * AWS::EC2::RouteTable
 * AWS::EC2::SecurityGroup
 * AWS::EC2::Subnet
@@ -36,12 +30,16 @@ Cumulonimbus is a Node.js library for creating AWS CloudFormation templates prog
 * AWS::IAM::Role
 * AWS::IAM::User
 * AWS::IAM::UserToGroupAddition
+* AWS::RDS::DBCluster
+* AWS::Redshift::Cluster
+* AWS::Redshift::ClusterSecurityGroup
+* AWS::Redshift::ClusterSubnetGroup
+* AWS::S3::Bucket
+* AWS::S3::BucketPolicy
 * AWS::SNS::Topic
 * AWS::SNS::TopicPolicy
 * AWS::SQS::Queue
 * AWS::SQS::QueuePolicy
-* AWS::S3::Bucket
-* AWS::S3::BucketPolicy
 
 ## Usage
 
