@@ -11,12 +11,12 @@ describe('Fn::Not', function() {
   it('should output correct format', function() {
     var param = new cn.Parameter("MyParameter", "String");
     should(cn.Fn.Not(cn.Fn.Equals(param, "One"))).deepEqual({
-      "Fn::Not": {
+      "Fn::Not": [{
         "Fn::Equals": [
           {"Ref": "MyParameter"},
           "One"
         ]
-      }
+      }]
     })
   });
 });
