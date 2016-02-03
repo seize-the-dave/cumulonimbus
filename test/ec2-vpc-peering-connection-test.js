@@ -61,6 +61,21 @@ describe('AWS::EC2::VPCPeeringConnection', function() {
   });
 
   describe('PeerVpcId', function() {
+    it('accepts parameter', function() {
+      var vpc = new cn.Ec2.Vpc("VPC");
+      var resource = new cn.Ec2.VpcPeeringConnection("MyPeeringConnection");
+      var param = new cn.Parameter("MyPeerVpc", "AWS::EC2::VPC::Id");
+      resource.setPeerVpcId(param);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::VPCPeeringConnection",
+        "Properties": {
+          "PeerVpcId": {
+            "Ref": "MyPeerVpc"
+          }
+        }
+      });
+    });
+
     it('accepts reference', function() {
       var vpc = new cn.Ec2.Vpc("VPC");
       var resource = new cn.Ec2.VpcPeeringConnection("MyPeeringConnection");
