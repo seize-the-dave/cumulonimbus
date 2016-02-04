@@ -58,21 +58,6 @@ describe('AWS::EC2::SecurityGroup', function() {
     });
   });
 
-  describe('Tags', function() {
-    it('should be present in the JSON output', function() {
-      var resource = new cn.Ec2.SecurityGroup("MySecurityGroup");
-      resource.addTag("Name", "MySecurityGroup");
-      should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::SecurityGroup",
-        "Properties": {
-          "Tags": {
-            "Name": "MySecurityGroup"
-          }
-        }
-      });
-    });
-  });
-
   describe('SecurityGroupEgress', function() {
     describe('CidrIp', function() {
       it('should be present in the JSON output', function() {

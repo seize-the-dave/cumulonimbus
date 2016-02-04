@@ -14,22 +14,6 @@ describe('AWS::EC2::VPNGateway', function() {
     });
   });
 
-  describe('Tags', function() {
-    it('should be present in the JSON output', function() {
-      var resource = new cn.Ec2.VpnGateway("VPN");
-      resource.addTag("Name", "VPN");
-      should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::VPNGateway",
-        "Properties": {
-          "Type": "ipsec.1",
-          "Tags": {
-            "Name": "VPN"
-          }
-        }
-      });
-    });
-  });
-
   describe('validation', function() {
     it('should pass validation', function() {
       var resource = new cn.Ec2.VpnGateway("VPN");

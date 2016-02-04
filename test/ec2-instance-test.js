@@ -11,21 +11,6 @@ describe('AWS::EC2::Instance', function() {
     });
   });
 
-  describe('Tags', function() {
-    it('should be present in the JSON output', function() {
-      var resource = new cn.Ec2.Instance("Instance");
-      resource.addTag("Name", "Instance");
-      should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::Instance",
-        "Properties": {
-          "Tags": {
-            "Name": "Instance"
-          }
-        }
-      });
-    });
-  });
-
   describe('AvailabilityZone', function() {
     it('should be present in the JSON output', function() {
       var resource = new cn.Ec2.Instance("Instance");
@@ -648,21 +633,6 @@ describe('AWS::EC2::Instance', function() {
       (function() {
         resource.setSubnetId("net-123456");
       }).should.throw(/subnet-/);
-    });
-  });
-
-  describe('Tags', function() {
-    it('should be present in the JSON output', function() {
-      var resource = new cn.Ec2.Instance("MyInstance");
-      resource.addTag("Name", "MyInstance");
-      should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::Instance",
-        "Properties": {
-          "Tags": {
-            "Name": "MyInstance"
-          }
-        }
-      });
     });
   });
 

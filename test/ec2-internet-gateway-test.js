@@ -11,20 +11,6 @@ describe('AWS::EC2::InternetGateway', function() {
     });
   });
 
-  describe('Tags', function() {
-    it('should be present in the JSON output', function() {
-      var resource = new cn.Ec2.InternetGateway("IGW");
-      resource.addTag("Name", "IGW");
-      should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::InternetGateway",
-        "Properties": {
-          "Tags": {
-            "Name": "IGW"
-          }
-        }
-      });
-    });
-  });
   describe('validation', function() {
     it('should never return an error', function() {
       var resource = new cn.Ec2.InternetGateway("IGW");

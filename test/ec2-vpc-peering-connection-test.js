@@ -11,21 +11,6 @@ describe('AWS::EC2::VPCPeeringConnection', function() {
     });
   });
 
-  describe('Tags', function() {
-    it('should be present in the JSON output', function() {
-      var resource = new cn.Ec2.VpcPeeringConnection("MyPeeringConnection");
-      resource.addTag("Name", "MyPeeringConnection");
-      should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::VPCPeeringConnection",
-        "Properties": {
-          "Tags": {
-            "Name": "MyPeeringConnection"
-          }
-        }
-      });
-    });
-  });
-
   describe('VpcId', function() {
     it('accepts reference', function() {
       var vpc = new cn.Ec2.Vpc("VPC");

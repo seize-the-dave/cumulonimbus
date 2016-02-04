@@ -90,21 +90,6 @@ describe('AWS::EC2::Subnet', function() {
     });
   });
 
-  describe('Tags', function() {
-    it('should be present in the JSON output', function() {
-      var resource = new cn.Ec2.Subnet("Subnet");
-      resource.addTag("Name", "Subnet");
-      should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::Subnet",
-        "Properties": {
-          "Tags": {
-            "Name": "Subnet"
-          }
-        }
-      });
-    });
-  });
-
   describe('validation', function() {
     it('should require CidrBlock', function() {
       var resource = new cn.Ec2.Subnet("Subnet");

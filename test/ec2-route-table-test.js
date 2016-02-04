@@ -46,21 +46,6 @@ describe('AWS::EC2::RouteTable', function() {
     });
   });
 
-  describe('Tags', function() {
-    it('should be present in the JSON output', function() {
-      var resource = new cn.Ec2.RouteTable("RouteTable");
-      resource.addTag("Name", "RouteTable");
-      should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::RouteTable",
-        "Properties": {
-          "Tags": {
-            "Name": "RouteTable"
-          }
-        }
-      });
-    });
-  });
-
   describe('validation', function() {
     it('should require VpcId', function() {
       var resource = new cn.Ec2.RouteTable("RouteTable");

@@ -11,10 +11,13 @@ describe('TaggableResource', function() {
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPC",
         "Properties": {
-          "Tags": {
-            "Foo": "Value",
-            "Bar": "Value"
-          }
+          "Tags": [{
+            "Key": "Foo",
+            "Value": "Value"
+          }, {
+            "Key": "Bar",
+            "Value": "Value"
+          }]
         }
       });
     });
@@ -26,27 +29,12 @@ describe('TaggableResource', function() {
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPC",
         "Properties": {
-          "Tags": {
-            "Foo": {
+          "Tags": [{
+            "Key": "Foo",
+            "Value": {
               "Ref": "MyParameter"
             }
-          }
-        }
-      });
-    });
-
-    it('should accept a parameter', function() {
-      var resource = new TaggableResource("Example", "AWS::EC2::VPC");
-      var param = new cn.Parameter("MyParameter", "String");
-      resource.addTag("Foo", param);
-      should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::VPC",
-        "Properties": {
-          "Tags": {
-            "Foo": {
-              "Ref": "MyParameter"
-            }
-          }
+          }]
         }
       });
     });
@@ -58,11 +46,12 @@ describe('TaggableResource', function() {
       should(resource.toJson()).deepEqual({
         "Type": "AWS::EC2::VPC",
         "Properties": {
-          "Tags": {
-            "Foo": {
+          "Tags": [{
+            "Key": "Foo",
+            "Value": {
               "Ref": "MyVpc"
             }
-          }
+          }]
         }
       });
     });

@@ -63,21 +63,6 @@ describe('AWS::EC2::VPC', function() {
     });
   });
 
-  describe('Tags', function() {
-    it('should be present in the JSON output', function() {
-      var resource = new cn.Ec2.Vpc("VPC");
-      resource.addTag("Name", "VPC");
-      should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::VPC",
-        "Properties": {
-          "Tags": {
-            "Name": "VPC"
-          }
-        }
-      });
-    });
-  });
-
   describe('validation', function() {
     it('should require CidrBlock', function() {
       var resource = new cn.Ec2.Vpc("VPC");
