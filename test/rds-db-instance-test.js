@@ -146,4 +146,17 @@ describe('AWS::RDS::DBInstance', function() {
       });
     });
   });
+
+  describe('Engine', function() {
+    it('should accept string', function() {
+      var resource = new cn.Rds.DbInstance("MyDbInstance");
+      resource.setEngine("aurora");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::RDS::DBInstance",
+        "Properties": {
+          "Engine": "aurora"
+        }
+      });
+    });
+  });
 });
