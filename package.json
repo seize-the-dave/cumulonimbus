@@ -1,6 +1,6 @@
 {
   "name": "cumulonimbus",
-  "version": "0.24.3",
+  "version": "0.25.0",
   "description": "Cumulonimbus is a Node.js library for creating AWS CloudFormation templates programmatically.",
   "author": "Dave Grant <david@grant.org.uk>",
   "homepage": "https://github.com/seize-the-dave/cumulonimbus",
