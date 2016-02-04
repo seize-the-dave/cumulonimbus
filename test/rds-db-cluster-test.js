@@ -74,6 +74,21 @@ describe('AWS::RDS::DBCluster', function() {
         }
       });
     });
+
+    it('should accept instance', function() {
+      var resource = new cn.Rds.DbCluster("MyDbCluster");
+      var subnetGroup = new cn.Rds.DbSubnetGroup("MySubnetGroup");
+      subnetGroup.setSubnetIds(["subnet-12345678"]);
+      resource.setDbSubnetGroupName(subnetGroup);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::RDS::DBCluster",
+        "Properties": {
+          "DBSubnetGroupName": {
+            "Ref": "MySubnetGroup"
+          }
+        }
+      });
+    });
   });
 
   describe('Engine', function() {
