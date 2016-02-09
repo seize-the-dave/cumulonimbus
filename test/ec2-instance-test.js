@@ -667,6 +667,19 @@ describe('AWS::EC2::Instance', function() {
     });
   });
 
+  describe('UserData', function() {
+    it('should be present in the JSON output', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      resource.setUserData("12345678");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "UserData": "12345678"
+        }
+      });
+    });
+  });
+
   describe('validation', function() {
     it('should require ImageId', function() {
       var resource = new cn.Ec2.Instance("MyInstance");
