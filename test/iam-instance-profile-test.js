@@ -52,5 +52,37 @@ describe('AWS::IAM::InstanceProfile', function() {
         }
       });
     });
+
+    it('should accept single reference', function() {
+      var resource = new cn.Iam.InstanceProfile("MyInstanceProfile");
+      var role = new cn.Iam.Role("MyRole");
+      resource.setRoles(role);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::IAM::InstanceProfile",
+        "Properties": {
+          "Roles": [
+            {
+              "Ref": "MyRole"
+            }
+          ]
+        }
+      });
+    });
+
+    it('should accept array reference', function() {
+      var resource = new cn.Iam.InstanceProfile("MyInstanceProfile");
+      var role = new cn.Iam.Role("MyRole");
+      resource.setRoles([role]);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::IAM::InstanceProfile",
+        "Properties": {
+          "Roles": [
+            {
+              "Ref": "MyRole"
+            }
+          ]
+        }
+      });
+    });
   });
 });
