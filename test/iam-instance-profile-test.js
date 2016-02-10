@@ -39,5 +39,18 @@ describe('AWS::IAM::InstanceProfile', function() {
         }
       });
     });
+
+    it('should accept string', function() {
+      var resource = new cn.Iam.InstanceProfile("MyInstanceProfile");
+      resource.setRoles("MyRole-AJJHDSKSDF");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::IAM::InstanceProfile",
+        "Properties": {
+          "Roles": [
+            "MyRole-AJJHDSKSDF"
+          ]
+        }
+      });
+    });
   });
 });
