@@ -680,6 +680,25 @@ describe('AWS::EC2::Instance', function() {
     });
   });
 
+  describe('IamInstanceProfile', function() {
+    it('should accept object and be present in the JSON output', function() {
+      var resource = new cn.Ec2.Instance("Instance");
+      var role = new cn.Iam.Role("MyRole");
+      var ip = new cn.Iam.InstanceProfile("MyInstanceProfile");
+      ip.setPath("/");
+      ip.setRoles([role]);
+      resource.setIamInstanceProfile(ip);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "IamInstanceProfile": {
+            "Ref": "MyInstanceProfile"
+          }
+        }
+      });
+    });
+  });
+
   describe('validation', function() {
     it('should require ImageId', function() {
       var resource = new cn.Ec2.Instance("MyInstance");
