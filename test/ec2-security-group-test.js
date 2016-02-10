@@ -121,7 +121,7 @@ describe('AWS::EC2::SecurityGroup', function() {
           "Properties": {
             "SecurityGroupEgress": [{
               "DestinationSecurityGroupId": {
-                "Ref": "MySecurityGroup"
+                "Fn::GetAtt": ["MySecurityGroup", "GroupId"]
               }
             }]
           }
@@ -250,7 +250,7 @@ describe('AWS::EC2::SecurityGroup', function() {
           "Properties": {
             "SecurityGroupIngress": [{
               "SourceSecurityGroupId": {
-                "Ref": "MySecurityGroup"
+                "Fn::GetAtt": ["MySecurityGroup", "GroupId"]
               }
             }]
           }

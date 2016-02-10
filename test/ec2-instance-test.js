@@ -443,7 +443,7 @@ describe('AWS::EC2::Instance', function() {
         "Type": "AWS::EC2::Instance",
         "Properties": {
           "SecurityGroupIds": [{
-            "Ref": "MySecurityGroup1"
+            "Fn::GetAtt": ["MySecurityGroup1", "GroupId"]
           }]
         }
       });
@@ -477,9 +477,9 @@ describe('AWS::EC2::Instance', function() {
         "Type": "AWS::EC2::Instance",
         "Properties": {
           "SecurityGroupIds": [{
-            "Ref": "MySecurityGroup1"
+            "Fn::GetAtt": ["MySecurityGroup1", "GroupId"]
           }, {
-            "Ref": "MySecurityGroup2"
+            "Fn::GetAtt": ["MySecurityGroup2", "GroupId"]
           }, ]
         }
       });
@@ -512,7 +512,7 @@ describe('AWS::EC2::Instance', function() {
         "Type": "AWS::EC2::Instance",
         "Properties": {
           "SecurityGroupIds": ["sg-12345678", {
-            "Ref": "MySecurityGroup1"
+            "Fn::GetAtt": ["MySecurityGroup1", "GroupId"]
           }]
         }
       });
