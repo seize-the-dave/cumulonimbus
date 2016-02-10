@@ -114,6 +114,8 @@ describe('AWS::IAM::User', function() {
   describe('Policies', function() {
     it('should accept array of policies', function() {
       var resource = new cn.Iam.User("MyUser");
+      var policy = new cn.Iam.InlinePolicy();
+      policy.setPolicyName("CFNUsers");
       var doc = new cn.Iam.PolicyDocument();
       var stmt = new cn.Iam.PolicyDocument.Statement();
       stmt.setSid("1");
@@ -121,11 +123,14 @@ describe('AWS::IAM::User', function() {
       stmt.setAction("s3:*");
       stmt.setResource("*");
       doc.addStatement(stmt);
-      resource.setPolicies([doc]);
+      policy.setPolicyDocument(doc);
+      resource.setPolicies([policy]);
       should(resource.toJson()).deepEqual({
         "Type": "AWS::IAM::User",
         "Properties": {
           "Policies": [{
+            "PolicyName": "CFNUsers",
+            "PolicyDocument": {
             "Version": "2012-10-17",
             "Statement": [{
               "Sid": "1",
@@ -133,7 +138,7 @@ describe('AWS::IAM::User', function() {
               "Action": "s3:*",
               "Resource": "*"
             }]
-          }]
+          }}]
         }
       });
     });
