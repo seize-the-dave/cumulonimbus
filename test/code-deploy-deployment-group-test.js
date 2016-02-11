@@ -113,6 +113,33 @@ describe('AWS::CodeDeploy::DeploymentGroup', function() {
     });
   });
 
+  describe('DeploymentConfigName', function() {
+    it('should accept a string', function() {
+      var resource = new cn.CodeDeploy.DeploymentGroup("MyDeploymentGroup");
+      resource.setDeploymentConfigName("Example");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::CodeDeploy::DeploymentGroup",
+        "Properties": {
+          "DeploymentConfigName": "Example"
+        }
+      });
+    });
+
+    it('should accept an object', function() {
+      var resource = new cn.CodeDeploy.DeploymentGroup("MyDeploymentGroup");
+      var config = new cn.CodeDeploy.DeploymentConfig("MyDeploymentConfig");
+      resource.setDeploymentConfigName(config);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::CodeDeploy::DeploymentGroup",
+        "Properties": {
+          "DeploymentConfigName": {
+            "Ref": "MyDeploymentConfig"
+          }
+        }
+      });
+    });
+  });
+
   describe('ServiceRoleArn', function() {
     it('should accept a string', function() {
       var resource = new cn.CodeDeploy.DeploymentGroup("MyDeploymentGroup");
