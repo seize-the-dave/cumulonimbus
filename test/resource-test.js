@@ -47,6 +47,29 @@ describe('Resource', function() {
     });
   });
 
+  describe('Metadata', function() {
+    it('should accept an object', function() {
+      var resource = new Resource("MyResoure", "AWS::EC2::VPC");
+      resource.setMetadata({"Object1": "Location1"});
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::VPC",
+        "Metadata": {
+          "Object1": "Location1"
+        }
+      });
+    });
+
+    it('should accept a resource', function() {
+      var resource = new Resource("MyResoure", "AWS::EC2::VPC");
+      var dep = new Resource("MyDependency", "AWS::EC2::Instance");
+      resource.dependsOn(dep);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::VPC",
+        "DependsOn": "MyDependency"
+      });
+    });
+  });
+
   describe('get reference', function() {
     it('should return a JSON object', function() {
       var resource = new Resource("MyResource", "AWS::EC2::VPC");
