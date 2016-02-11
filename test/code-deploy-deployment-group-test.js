@@ -133,7 +133,7 @@ describe('AWS::CodeDeploy::DeploymentGroup', function() {
         "Type": "AWS::CodeDeploy::DeploymentGroup",
         "Properties": {
           "ServiceRoleArn": {
-            "Ref": "MyRole"
+            "Fn::GetAtt": ["MyRole", "Arn"]
           }
         }
       });
