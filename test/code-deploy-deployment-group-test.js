@@ -76,4 +76,74 @@ describe('AWS::CodeDeploy::DeploymentGroup', function() {
       });
     });
   });
+
+  describe('DeploymentGroupName', function() {
+    it('should accept a string', function() {
+      var resource = new cn.CodeDeploy.DeploymentGroup("MyDeploymentGroup");
+      resource.setDeploymentGroupName("Example");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::CodeDeploy::DeploymentGroup",
+        "Properties": {
+          "DeploymentGroupName": "Example"
+        }
+      });
+    });
+  });
+
+  describe('Ec2TagFilters', function() {
+    it('should accept a list of objects', function() {
+      var resource = new cn.CodeDeploy.DeploymentGroup("MyDeploymentGroup");
+      var filter = new cn.CodeDeploy.DeploymentGroup.Ec2TagFilters();
+      filter.setKey("key");
+      filter.setValue("value");
+      filter.setType("KEY_AND_VALUE");
+      resource.setEc2TagFilters([filter]);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::CodeDeploy::DeploymentGroup",
+        "Properties": {
+          "Ec2TagFilters": [
+            {
+              "Key": "key",
+              "Value": "value",
+              "Type": "KEY_AND_VALUE"
+            }
+          ]
+        }
+      });
+    });
+  });
+
+  describe('ServiceRoleArn', function() {
+    it('should accept a string', function() {
+      var resource = new cn.CodeDeploy.DeploymentGroup("MyDeploymentGroup");
+      resource.setServiceRoleArn("arn:aws:iam::306252214413:role/example-CodeDeployRole-1DL3NLF7KU5MQ");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::CodeDeploy::DeploymentGroup",
+        "Properties": {
+          "ServiceRoleArn": "arn:aws:iam::306252214413:role/example-CodeDeployRole-1DL3NLF7KU5MQ"
+        }
+      });
+    });
+
+    it('should accept an object', function() {
+      var resource = new cn.CodeDeploy.DeploymentGroup("MyDeploymentGroup");
+      var role = new cn.Iam.Role("MyRole");
+      resource.setServiceRoleArn(role);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::CodeDeploy::DeploymentGroup",
+        "Properties": {
+          "ServiceRoleArn": {
+            "Ref": "MyRole"
+          }
+        }
+      });
+    });
+
+    it('should reject an invalid string', function() {
+      var resource = new cn.CodeDeploy.DeploymentGroup("MyDeploymentGroup");
+      should(function() {
+        resource.setServiceRoleArn("arn:aws:ian::306252214413:role/example-CodeDeployRole-1DL3NLF7KU5MQ");
+      }).throw(/Invalid ARN/);
+    });
+  });
 });
