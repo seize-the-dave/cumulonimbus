@@ -45,6 +45,17 @@ describe('Resource', function() {
         "DependsOn": "MyDependency"
       });
     });
+
+    it('should accept an array of resources', function() {
+      var resource = new Resource("MyResoure", "AWS::EC2::VPC");
+      var depOne = new Resource("FirstDependency", "AWS::EC2::Instance");
+      var depTwo = new Resource("SecondDependency", "AWS::EC2::Instance");
+      resource.dependsOn([depOne, depTwo]);
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::EC2::VPC",
+        "DependsOn": ["FirstDependency", "SecondDependency"]
+      });
+    });
   });
 
   describe('Metadata', function() {
@@ -56,16 +67,6 @@ describe('Resource', function() {
         "Metadata": {
           "Object1": "Location1"
         }
-      });
-    });
-
-    it('should accept a resource', function() {
-      var resource = new Resource("MyResoure", "AWS::EC2::VPC");
-      var dep = new Resource("MyDependency", "AWS::EC2::Instance");
-      resource.dependsOn(dep);
-      should(resource.toJson()).deepEqual({
-        "Type": "AWS::EC2::VPC",
-        "DependsOn": "MyDependency"
       });
     });
   });

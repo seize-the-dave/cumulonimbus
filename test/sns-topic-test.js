@@ -42,7 +42,7 @@ describe('AWS::SNS::Topic', function() {
       var resource = new cn.Sns.Topic("MyTopic");
       var subscription = new cn.Sns.Topic.Subscription();
       subscription.setProtocol("http");
-      subscription.setEndpoint("http://example.org/")
+      subscription.setEndpoint("http://example.org/");
       resource.setSubscription([subscription]);
       should(resource.toJson()).deepEqual({
         "Type": "AWS::SNS::Topic",
@@ -62,6 +62,19 @@ describe('AWS::SNS::Topic', function() {
           subscription.setEndpoint("http://example.org/");
           should(subscription).deepEqual({
             "Endpoint": "http://example.org/"
+          });
+        });
+      });
+
+      describe('Endpoint', function() {
+        it('should accept sqs instance', function() {
+          var queue = new cn.Sqs.Queue("MyQueue");
+          var subscription = new cn.Sns.Topic.Subscription();
+          subscription.setEndpoint(queue);
+          should(subscription).deepEqual({
+            "Endpoint": {
+              "Fn::GetAtt": ["MyQueue", "Arn"]
+            }
           });
         });
       });
