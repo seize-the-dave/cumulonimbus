@@ -83,13 +83,13 @@ describe('AWS::Redshift::Cluster', function() {
     it('should accept a reference', function() {
       var resource = new cn.Redshift.Cluster("MyCluster");
       var csg = new cn.Redshift.ClusterSubnetGroup("MyClusterSubnetGroup");
-      resource.setClusterSubnetGroupName([csg]);
+      resource.setClusterSubnetGroupName(csg);
       should(resource.toJson()).deepEqual({
         "Type": "AWS::Redshift::Cluster",
         "Properties": {
-          "ClusterSubnetGroupName": [{
+          "ClusterSubnetGroupName": {
             "Ref": "MyClusterSubnetGroup"
-          }],
+          },
         }
       });
     });
