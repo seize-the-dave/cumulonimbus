@@ -237,4 +237,17 @@ describe('AWS::Redshift::Cluster', function() {
       });
     });
   });
+
+  describe('SnapshotIdentifier', function() {
+    it('should accept a string', function() {
+      var resource = new cn.Redshift.Cluster("MyCluster");
+      resource.setSnapshotIdentifier("abc-123");
+      should(resource.toJson()).deepEqual({
+        "Type": "AWS::Redshift::Cluster",
+        "Properties": {
+          "SnapshotIdentifier": "abc-123"
+        }
+      });
+    });
+  });
 });
